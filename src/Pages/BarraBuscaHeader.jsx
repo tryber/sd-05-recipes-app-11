@@ -7,9 +7,7 @@ export default function BarraBuscaHeader(props) {
   return (
     <div className="Bar-Busca-Header-column">
       <HeaderBusca />
-   
       <Search />
-
       <Options />
     </div>
   );
