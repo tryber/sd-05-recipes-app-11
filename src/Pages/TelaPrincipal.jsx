@@ -21,5 +21,5 @@ export default function TelaPrincipal(props) {
 }
 
 TelaPrincipal.propTypes = {
-  match: PropTypes.objectOf(PropTypes.object()).isRequired,
+  match: PropTypes.objectOf(PropTypes.object).isRequired,
 };
