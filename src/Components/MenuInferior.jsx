@@ -1,23 +1,36 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import mealIcon from '../images/mealIcon.svg';
+import exploreIcon from '../images/exploreIcon.svg';
+import drinkIcon from '../images/drinkIcon.svg';
 
 export default function MenuInferior() {
   return (
     <footer data-testid="footer">
-      <button
-        data-testid="food-bottom-btn" type="button"
-      >
-        <img src="src/images/mealIcon"alt="food" />
-      </button>
-      <button
-        data-testid="explore-bottom-btn" type="button"
-      >
-        <img src="src/images/exploreIcon" alt="explore" />
-      </button>
-      <button
-        data-testid="drinks-bottom-btn" type="button"
-      >
-        <img src="src/images/drinkIcon" alt="drinks" />
-      </button>
+      <Link to="/explorar/comidas">
+        <img
+          className="foodBottom"
+          data-testid="food-bottom-btn"
+          alt="food"
+          src={mealIcon}
+        />
+      </Link>
+      <Link to="/explorar">
+        <img
+          className="exploreBottom"
+          data-testid="explore-bottom-btn"
+          alt="explore"
+          src={exploreIcon}
+        />
+      </Link>
+      <Link to="/explorar/bebidas">
+        <img
+          className="drinkBottom"
+          data-testid="drinks-bottom-btn"
+          alt="drink"
+          src={drinkIcon}
+        />
+      </Link>
     </footer>
   );
 }
