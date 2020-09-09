@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export default function Login() {
   return (
@@ -8,6 +8,5 @@ export default function Login() {
       <input data-testid="password-input" type="password" minLength="6">Senha</input>
       <button data-testid="login-submit-btn" type="button" disabled>Entrar</button>
     </div>
-  )
+  );
 }
-
