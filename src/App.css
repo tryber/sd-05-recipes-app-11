@@ -68,13 +68,3 @@
   margin-right: auto;
   vertical-align: middle;
 }
-
-div.Bar-Busca-Header {
-  width: 360px;
-  height: 58px;
-  left: 0px;
-  top: 0px;
-
-  background: #c4c4c4;
-  border: 5px solid black;
-}
