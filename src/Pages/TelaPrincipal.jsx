@@ -4,20 +4,19 @@ import MenuInferior from '../Components/MenuInferior';
 import BarraBuscaHeader from '../Components/Barra de Busca - Header/BarraBuscaHeader';
 
 export default function TelaPrincipal(props) {
-  console.log(props);
   return (/comida/).test(props.match.path) ?
   (
     <div>
-      <BarraBuscaHeader />
-      comida
+      <BarraBuscaHeader title={'Comidas'} />
+      comidas
       <MenuInferior />
     </div>
   )
   :
   (
     <div>
-      <BarraBuscaHeader />
-      bebida
+      <BarraBuscaHeader title={'Bebidas'} />
+      bebidas
       <MenuInferior />
     </div>
   );

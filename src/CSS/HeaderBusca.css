@@ -2,29 +2,33 @@
   background: #c4c4c4;
   border: 3px solid black;
   display: flex;
-  height: 58px;
-  left: 0;
+  height: 60px;
+  justify-content: space-around;
+  margin: 0;
   top: 0;
-  width: 360px;
+}
+
+.Top-Btn {
+  align-self: center;
 }
 
 .Bar-Busca-Header-text {
-  align-items: flex-end;
-  display: flex;
+  align-self: center;
   font-family: Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
-  font-size: 30px;
-  font-style: normal;
+  font-size: 25px;
   font-weight: 500;
-  height: 35px;
-  left: 123px;
-  line-height: 35px;
-  top: 12px;
-  width: 119px;
 }
 
-.Bar-Busca-Header-column {
+.search-input {
+  align-items: center;
+  border: 3px solid black;
+  border-radius: 10px;
+  margin: 5px 2%;
+  width: 96%;
+}
+
+.search-top-btn {
   display: flex;
-  flex-direction: column;
-  height: 150px;
   justify-content: space-around;
+  margin-bottom: 10px;
 }

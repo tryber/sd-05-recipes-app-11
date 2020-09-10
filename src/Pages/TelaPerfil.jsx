@@ -5,7 +5,7 @@ import BarraBuscaHeader from '../Components/Barra de Busca - Header/BarraBuscaHe
 export default function TelaPerfil() {
   return (
     <div>
-      <BarraBuscaHeader />
+      <BarraBuscaHeader title={'Perfil'} />
       <MenuInferior />
     </div>
   );
