@@ -7,7 +7,7 @@ import drinkIcon from '../images/drinkIcon.svg';
 export default function MenuInferior() {
   return (
     <footer data-testid="footer">
-      <Link to="/explorar/comidas">
+      <Link to="/comidas">
         <img
           className="foodBottom"
           data-testid="food-bottom-btn"
@@ -23,7 +23,7 @@ export default function MenuInferior() {
           src={exploreIcon}
         />
       </Link>
-      <Link to="/explorar/bebidas">
+      <Link to="/bebidas">
         <img
           className="drinkBottom"
           data-testid="drinks-bottom-btn"
