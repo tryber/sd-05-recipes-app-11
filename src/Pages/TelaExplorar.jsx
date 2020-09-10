@@ -5,7 +5,7 @@ import BarraBuscaHeader from '../Components/Barra de Busca - Header/BarraBuscaHe
 export default function TelaExplorar() {
   return (
     <div>
-      <BarraBuscaHeader />
+      <BarraBuscaHeader title={'Explorar'} />
       <MenuInferior />
     </div>
   );
