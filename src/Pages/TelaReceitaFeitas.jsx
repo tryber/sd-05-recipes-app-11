@@ -4,7 +4,7 @@ import BarraBuscaHeader from '../Components/Barra de Busca - Header/BarraBuscaHe
 export default function TelaReceitaFeitas() {
   return (
     <div>
-      <BarraBuscaHeader />
+      <BarraBuscaHeader title={'Receitas Feitas'} />
     </div>
   );
 }
