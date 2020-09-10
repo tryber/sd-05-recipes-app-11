@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import mealIcon from '../images/mealIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import drinkIcon from '../images/drinkIcon.svg';
-import "../CSS/MenuInferior.css";
+import '../CSS/MenuInferior.css';
 
 export default function MenuInferior() {
   return (

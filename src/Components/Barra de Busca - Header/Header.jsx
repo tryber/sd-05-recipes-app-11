@@ -6,11 +6,11 @@ import '../../CSS/HeaderBusca.css';
 export default function HeaderBusca() {
   return (
     <div className="Bar-Busca-Header">
-      <img src={userLogo} alt="Imagem User" className="Bar-Busca-Header" />
+      <img src={userLogo} alt="Imagem User" className="Bar-Busca-Header-image" />
       <div className="Bar-Busca-Header-text">
         <span>Comidas</span>
       </div>
-      <img src={searchLogo} alt="Search Logo" className="Bar-Busca-Header" />
+      <img src={searchLogo} alt="Search Logo" className="Bar-Busca-Header-image" />
     </div>
   );
 }

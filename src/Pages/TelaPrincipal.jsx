@@ -6,7 +6,7 @@ import BarraBuscaHeader from '../Components/Barra de Busca - Header/BarraBuscaHe
 export default function TelaPrincipal(props) {
   console.log(props);
   return (/comida/).test(props.match.path) ?
-  ( 
+  (
     <div>
       <BarraBuscaHeader />
       comida
