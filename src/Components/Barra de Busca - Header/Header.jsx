@@ -1,7 +1,7 @@
 import React from 'react';
 import userLogo from '../../images/profileIcon.svg';
 import searchLogo from '../../images/searchIcon.svg';
-import '../../CSS/HeaderBusca.css'
+import '../../CSS/HeaderBusca.css';
 
 export default function HeaderBusca() {
   return (

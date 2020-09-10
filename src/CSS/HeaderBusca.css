@@ -1,32 +1,30 @@
-div.Bar-Busca-Header {
-  width: 360px;
-  height: 58px;
-  left: 0px;
-  top: 0px;
-  display: flex;
-
+.Bar-Busca-Header {
   background: #c4c4c4;
   border: 5px solid black;
+  display: flex;
+  height: 58px;
+  left: 0;
+  top: 0;
+  width: 360px;
 }
 
 .Bar-Busca-Header-text {
-  width: 119px;
+  align-items: flex-end;
+  display: flex;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
   height: 35px;
   left: 123px;
-  top: 12px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 30px;
   line-height: 35px;
-  display: flex;
-  align-items: flex-end;
+  top: 12px;
+  width: 119px;
 }
 
 .Bar-Busca-Header-column {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   height: 150px;
+  justify-content: space-around;
 }
