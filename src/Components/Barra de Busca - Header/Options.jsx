@@ -1,7 +1,5 @@
 import React from 'react';
 
-const options = ['Ingrediente', 'Nome', 'Primeira letra'];
-/* const idOptions = ['ingredient-search-radio',]; */
 export default function Options() {
   return (
     <div className="search-radio">
