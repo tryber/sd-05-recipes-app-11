@@ -16,14 +16,13 @@ export default function HeaderBusca(props) {
         <span>{title}</span>
       </div>
       {!showTop ? (
-        <div onClick={() => setShowSearch(!showSearch)}>
-          <img
-            src={searchLogo}
-            alt="Search Logo"
-            data-testid="search-top-btn"
-            className="Top-Btn"
-          />
-        </div>
+        <img
+          onClick={() => setShowSearch(!showSearch)}
+          src={searchLogo}
+          alt="Search Logo"
+          data-testid="search-top-btn"
+          className="Top-Btn"
+        />
       ) : null}
     </div>
   );

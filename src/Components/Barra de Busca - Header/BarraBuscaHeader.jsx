@@ -17,8 +17,8 @@ export default function BarraBuscaHeader(props) {
       <div>
         {showSearch ? <Search /> : null}
         {showSearch ? <Options /> : null}
+        {showSearch ? <ButtonBuscar /> : null}
       </div>
-      <ButtonBuscar />
     </div>
   );
 }

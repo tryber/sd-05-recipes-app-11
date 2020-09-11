@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import BarraBusca from '../Components/Barra de Busca - Header/BarraBuscaHeader';
 
 describe('testando arquivo Header', () => {
@@ -24,7 +24,7 @@ describe('testando arquivo Header', () => {
     expect(HeaderName).toBeInTheDocument();
   });
 
-  test('renderiza link com imagem da lupa de busca', () => {
+  test('renderiza imagem da lupa de busca', () => {
     const { getByTestId } = render(
       <MemoryRouter>
         <BarraBusca />
@@ -42,6 +42,8 @@ describe('testando arquivo Search', () => {
         <BarraBusca />
       </MemoryRouter>,
     );
+    const HeaderLupa = getByTestId('search-top-btn');
+    fireEvent.click(HeaderLupa);
     const HeaderSearch = getByTestId('search-input');
     expect(HeaderSearch).toBeInTheDocument();
   });
@@ -54,6 +56,8 @@ describe('testando arquivo Options', () => {
         <BarraBusca />
       </MemoryRouter>,
     );
+    const HeaderLupa = getByTestId('search-top-btn');
+    fireEvent.click(HeaderLupa);
     const HeaderIngredientesRadio = getByTestId('ingredient-search-radio');
     expect(HeaderIngredientesRadio).toBeInTheDocument();
   });
@@ -64,6 +68,8 @@ describe('testando arquivo Options', () => {
         <BarraBusca />
       </MemoryRouter>,
     );
+    const HeaderLupa = getByTestId('search-top-btn');
+    fireEvent.click(HeaderLupa);
     const HeaderNameRadio = getByTestId('name-search-radio');
     expect(HeaderNameRadio).toBeInTheDocument();
   });
@@ -74,6 +80,8 @@ describe('testando arquivo Options', () => {
         <BarraBusca />
       </MemoryRouter>,
     );
+    const HeaderLupa = getByTestId('search-top-btn');
+    fireEvent.click(HeaderLupa);
     const HeaderFirstLetterRadio = getByTestId('first-letter-search-radio');
     expect(HeaderFirstLetterRadio).toBeInTheDocument();
   });
@@ -86,6 +94,8 @@ describe('testando arquivo ButtonBuscar', () => {
         <BarraBusca />
       </MemoryRouter>,
     );
+    const HeaderLupa = getByTestId('search-top-btn');
+    fireEvent.click(HeaderLupa);
     const HeaderButton = getByTestId('exec-search-btn');
     expect(HeaderButton).toBeInTheDocument();
   });
