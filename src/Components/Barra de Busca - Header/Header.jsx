@@ -16,13 +16,14 @@ export default function HeaderBusca(props) {
         <span>{title}</span>
       </div>
       {!showTop ? (
-        <img
-          onClick={() => setShowSearch(!showSearch)}
-          src={searchLogo}
-          alt="Search Logo"
-          data-testid="search-top-btn"
-          className="Top-Btn"
-        />
+        <Link onClick={() => setShowSearch(!showSearch)}>
+          <img
+            src={searchLogo}
+            alt="Search Logo"
+            data-testid="search-top-btn"
+            className="Top-Btn"
+          />
+        </Link>
       ) : null}
     </div>
   );
@@ -30,4 +31,7 @@ export default function HeaderBusca(props) {
 
 HeaderBusca.propTypes = {
   title: PropTypes.string.isRequired,
+  showSearch: PropTypes.bool.isRequired,
+  setShowSearch: PropTypes.func.isRequired,
+  showTop: PropTypes.bool.isRequired,
 };

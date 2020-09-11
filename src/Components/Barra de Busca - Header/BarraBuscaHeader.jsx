@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from './Header';
 import Search from './Search';
 import Options from './Options';
-import { useState } from 'react';
 import ButtonBuscar from './ButtonBuscar';
 
 export default function BarraBuscaHeader(props) {
