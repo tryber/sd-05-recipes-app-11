@@ -5,6 +5,7 @@ import Search from './Search';
 import Options from './Options';
 import { useState } from 'react';
 import { set } from 'lodash';
+import BottonBuscar from './ButtonBuscar';
 
 export default function BarraBuscaHeader(props) {
   const [showSearch, setShowSearch] = useState(false);
@@ -14,8 +15,11 @@ export default function BarraBuscaHeader(props) {
   return (
     <div className="Bar-Busca-Header-column">
       <Header title={props.title} setShowSearch={update} showSearch={showSearch} />
+      <div>
       {showSearch ? <Search /> : null}
       {showSearch ? <Options /> : null}
+      </div>
+      <BottonBuscar />
     </div>
   );
 }
