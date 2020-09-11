@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+
 
 // HA https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
 function validateEmail(email) {
@@ -29,9 +29,10 @@ export default function Login() {
   }, [email, password]);
 
   return (
-    <form>
-      <h1>Login</h1>
+    <form className="TelaLogin">
+      <h1 className="loginText">Login</h1>
       <input
+        className="loginInput"
         data-testid="email-input"
         type="email"
         placeholder="Email"
@@ -39,6 +40,7 @@ export default function Login() {
         required
       />
       <input
+        className="loginInput"
         data-testid="password-input"
         type="password"
         minLength="7"
@@ -47,6 +49,7 @@ export default function Login() {
         required
       />
       <button
+        className="loginButton"
         data-testid="login-submit-btn"
         type="button"
         onClick={() => onclickFuntion()}
