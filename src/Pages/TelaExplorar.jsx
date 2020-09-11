@@ -1,11 +1,11 @@
 import React from 'react';
 import MenuInferior from '../Components/MenuInferior';
-import BarraBuscaHeader from '../Components/Barra de Busca - Header/BarraBuscaHeader';
+import BarraHeader from '../Components/Barra de Busca - Header/Header';
 
 export default function TelaExplorar() {
   return (
     <div>
-      <BarraBuscaHeader title={'Explorar'} />
+      <BarraHeader title={'Explorar'} showTop="true" />
       <MenuInferior />
     </div>
   );

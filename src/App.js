@@ -20,8 +20,8 @@ function App() {
       <Route path="/comidas/{id-da-receita}/in-progress" component={ProcessoReceitas} />
       <Route path="/bebidas/{id-da-receita}/in-progress" component={ProcessoReceitas} />
       <Route path="/comidas/{id-da-receita}" component={DetalhesComidas} />
-      <Route path="/comidas" component={TelaInicial} />
-      <Route path="/bebidas" component={TelaInicial} />
+      <Route exact path="/comidas" component={TelaInicial} />
+      <Route exact path="/bebidas" component={TelaInicial} />
       <Route path="/bebidas/{id-da-receita}" component={DetalhesBebidas} />
       <Route path="/explorar/comidas/ingredientes" component={ExplorarIngredientes} />
       <Route path="/explorar/bebidas/ingredientes" component={ExplorarIngredientes} />

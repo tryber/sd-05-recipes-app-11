@@ -1,20 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MenuInferior from '../Components/MenuInferior';
-import BarraBuscaHeader from '../Components/Barra de Busca - Header/BarraBuscaHeader';
+import BarraHeader from '../Components/Barra de Busca - Header/Header';
 
 export default function TelaExplorarBebidaComida(props) {
-  return (/comidas/).test(props.match.path) ?
-  (
+  return /comidas/.test(props.match.path) ? (
     <div>
-      <BarraBuscaHeader title={'Explorar Comidas'} />
+      <BarraHeader title={'Explorar Comidas'} showTop="true" />
       <MenuInferior />
     </div>
-  )
-  :
-  (
+  ) : (
     <div>
-      <BarraBuscaHeader title={'Explorar Bebidas'} />
+      <BarraHeader title={'Explorar Bebidas'} showTop="true" />
       <MenuInferior />
     </div>
   );
