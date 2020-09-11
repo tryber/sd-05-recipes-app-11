@@ -9,8 +9,8 @@ test('renderiza link com imagem food', () => {
     <MenuInferior />
   </MemoryRouter>
   );
-  const foodBottom = getByTestId('food-bottom-btn');
-  expect(foodBottom).toBeInTheDocument();
+  const foodButtom = getByTestId('food-bottom-btn');
+  expect(foodButtom).toBeInTheDocument();
 });
 
 test('renderiza link com imagem explore', () => {
@@ -19,8 +19,8 @@ test('renderiza link com imagem explore', () => {
     <MenuInferior />
   </MemoryRouter>
   );
-  const exploreBottom = getByTestId('explore-bottom-btn');
-  expect(exploreBottom).toBeInTheDocument();
+  const exploreButtom = getByTestId('explore-bottom-btn');
+  expect(exploreButtom).toBeInTheDocument();
 });
 
 test('renderiza link com imagem drink', () => {
@@ -29,6 +29,6 @@ test('renderiza link com imagem drink', () => {
     <MenuInferior />
   </MemoryRouter>
   );
-  const drinkBottom = getByTestId('drinks-bottom-btn');
-  expect(drinkBottom).toBeInTheDocument();
+  const drinkButtom = getByTestId('drinks-bottom-btn');
+  expect(drinkButtom).toBeInTheDocument();
 });

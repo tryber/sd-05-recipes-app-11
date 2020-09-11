@@ -10,8 +10,8 @@ describe('testando arquivo Header', () => {
       <BarraBusca />
     </MemoryRouter>
     );
-    const foodBottom = getByTestId('profile-top-btn');
-    expect(foodBottom).toBeInTheDocument();
+    const HeaderProfile = getByTestId('profile-top-btn');
+    expect(HeaderProfile).toBeInTheDocument();
   });
 
   test('renderiza o titulo com o nome da página', () => {
@@ -20,8 +20,8 @@ describe('testando arquivo Header', () => {
       <BarraBusca />
     </MemoryRouter>
     );
-    const exploreBottom = getByTestId('page-title');
-    expect(exploreBottom).toBeInTheDocument();
+    const HeaderName = getByTestId('page-title');
+    expect(HeaderName).toBeInTheDocument();
   });
 
   test('renderiza link com imagem da lupa de busca', () => {
@@ -30,8 +30,8 @@ describe('testando arquivo Header', () => {
       <BarraBusca />
     </MemoryRouter>
     );
-    const drinkBottom = getByTestId('search-top-btn');
-    expect(drinkBottom).toBeInTheDocument();
+    const HeaderLupa = getByTestId('search-top-btn');
+    expect(HeaderLupa).toBeInTheDocument();
   });
 
 describe('testando arquivo Search', () => {
@@ -41,51 +41,51 @@ describe('testando arquivo Search', () => {
       <BarraBusca />
     </MemoryRouter>
     );
-    const foodBottom = getByTestId('search-input');
-    expect(foodBottom).toBeInTheDocument();
+    const HeaderSearch = getByTestId('search-input');
+    expect(HeaderSearch).toBeInTheDocument();
   });
 });
 
 });describe('testando arquivo Options', () => {
-  test('renderiza link com imagem Perfil', () => {
+  test('renderiza radio ingredientes', () => {
     const { getByTestId } = render(
     <MemoryRouter>
       <BarraBusca />
     </MemoryRouter>
     );
-    const foodBottom = getByTestId('ingredient-search-radio');
-    expect(foodBottom).toBeInTheDocument();
+    const HeaderIngredientesRadio = getByTestId('ingredient-search-radio');
+    expect(HeaderIngredientesRadio).toBeInTheDocument();
   });
 
-  test('renderiza o titulo com o nome da página', () => {
+  test('renderiza radio nome', () => {
     const { getByTestId } = render(
     <MemoryRouter>
       <BarraBusca />
     </MemoryRouter>
     );
-    const exploreBottom = getByTestId('name-search-radio');
-    expect(exploreBottom).toBeInTheDocument();
+    const HeaderNameRadio = getByTestId('name-search-radio');
+    expect(HeaderNameRadio).toBeInTheDocument();
   });
 
-  test('renderiza link com imagem da lupa de busca', () => {
+  test('renderiza radio primeira letra', () => {
     const { getByTestId } = render(
     <MemoryRouter>
       <BarraBusca />
     </MemoryRouter>
     );
-    const drinkBottom = getByTestId('first-letter-search-radio');
-    expect(drinkBottom).toBeInTheDocument();
+    const HeaderFirstLetterRadio = getByTestId('first-letter-search-radio');
+    expect(HeaderFirstLetterRadio).toBeInTheDocument();
   });
 });
 
 describe('testando arquivo ButtonBuscar', () => {
-  test('renderiza link com imagem Perfil', () => {
+  test('renderiza botão Buscar', () => {
     const { getByTestId } = render(
     <MemoryRouter>
       <BarraBusca />
     </MemoryRouter>
     );
-    const foodBottom = getByTestId("exec-search-btn");
-    expect(foodBottom).toBeInTheDocument();
+    const HeaderButton = getByTestId("exec-search-btn");
+    expect(HeaderButton).toBeInTheDocument();
   });
 });
