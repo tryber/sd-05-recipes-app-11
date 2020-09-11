@@ -16,9 +16,7 @@ export default function HeaderBusca(props) {
         <span>{title}</span>
       </div>
       {!showTop ? (
-        <div
-          onClick={() => setShowSearch(!showSearch)}
-        >
+        <div onClick={() => setShowSearch(!showSearch)}>
           <img
             src={searchLogo}
             alt="Search Logo"
