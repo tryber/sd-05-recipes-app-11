@@ -5,36 +5,36 @@ export default function Options() {
     <div className="search-radio">
       <div>
         <input
-          id="Ingrediente"
-          key="Ingrediente"
+          id="ingrediente"
+          key="ingrediente"
           data-testid="ingredient-search-radio"
           type="radio"
-          value="Ingrediente"
-          name="Ingrediente"
+          value="ingrediente"
+          name="options"
         />
-        <label htmlFor="Ingrediente">Ingrediente</label>
+        <label htmlFor="ingrediente">Ingrediente</label>
       </div>
       <div>
         <input
-          id="Nome"
-          key="Nome"
+          id="nome"
+          key="nome"
           data-testid="name-search-radio"
           type="radio"
-          value="Nome"
-          name="Nome"
+          value="nome"
+          name="options"
         />
-        <label htmlFor="Nome">Nome</label>
+        <label htmlFor="nome">Nome</label>
       </div>
       <div>
         <input
-          id="Primeira letra"
-          key="Primeira letra"
+          id="primeiraLetra"
+          key="primeiraLetra"
           data-testid="first-letter-search-radio"
           type="radio"
-          value="Primeira letra"
-          name="Primeira letra"
+          value="primeiraLetra"
+          name="options"
         />
-        <label htmlFor="Primeira letra">Primeira letra</label>
+        <label htmlFor="primeiraLetra">Primeira letra</label>
       </div>
     </div>
   );
