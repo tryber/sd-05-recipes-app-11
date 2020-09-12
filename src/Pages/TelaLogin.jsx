@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Logo from '../images/open-baladin-roma.png';
 import '../CSS/TelaLogin.css';
 
 // HA https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
@@ -59,6 +60,7 @@ export default function Login() {
 
   return (
     <form className="TelaLogin">
+      <img src={Logo} alt="logo" className="loginLogo" />
       <h1 className="loginText">Login</h1>
       <input
         className="loginInput"
@@ -80,6 +82,7 @@ export default function Login() {
       <Link to="/comidas">
         <button
           data-testid="login-submit-btn"
+          className="loginButton"
           type="button"
           onClick={() => onclickFuntion(email)}
           disabled={validation}

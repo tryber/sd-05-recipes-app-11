@@ -4,39 +4,37 @@ export default function Options() {
   return (
     <div className="search-radio">
       <div>
-        <div>
-          <input
-            id="Ingrediente"
-            key="Ingrediente"
-            data-testid="ingredient-search-radio"
-            type="radio"
-            value="Ingrediente"
-            name="Ingrediente"
-          />
-          <label htmlFor="Ingrediente">Ingrediente</label>
-        </div>
-        <div>
-          <input
-            id="Nome"
-            key="Nome"
-            data-testid="name-search-radio"
-            type="radio"
-            value="Nome"
-            name="Nome"
-          />
-          <label htmlFor="Nome">Nome</label>
-        </div>
-        <div>
-          <input
-            id="Primeira letra"
-            key="Primeira letra"
-            data-testid="first-letter-search-radio"
-            type="radio"
-            value="Primeira letra"
-            name="Primeira letra"
-          />
-          <label htmlFor="Primeira letra">Primeira letra</label>
-        </div>
+        <input
+          id="ingrediente"
+          key="ingrediente"
+          data-testid="ingredient-search-radio"
+          type="radio"
+          value="ingrediente"
+          name="options"
+        />
+        <label htmlFor="ingrediente">Ingrediente</label>
+      </div>
+      <div>
+        <input
+          id="nome"
+          key="nome"
+          data-testid="name-search-radio"
+          type="radio"
+          value="nome"
+          name="options"
+        />
+        <label htmlFor="nome">Nome</label>
+      </div>
+      <div>
+        <input
+          id="primeiraLetra"
+          key="primeiraLetra"
+          data-testid="first-letter-search-radio"
+          type="radio"
+          value="primeiraLetra"
+          name="options"
+        />
+        <label htmlFor="primeiraLetra">Primeira letra</label>
       </div>
     </div>
   );

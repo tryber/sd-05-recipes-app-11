@@ -13,7 +13,7 @@ export default function BarraBuscaHeader(props) {
   return (
     <div className="Bar-Busca-Header-column">
       <Header title={props.title} setShowSearch={update} showSearch={showSearch} />
-      <div>
+      <div className="search">
         {showSearch ? <Search /> : null}
         {showSearch ? <Options /> : null}
         {showSearch ? <ButtonBuscar /> : null}

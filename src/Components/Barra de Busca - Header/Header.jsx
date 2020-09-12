@@ -9,19 +9,18 @@ export default function HeaderBusca(props) {
   const { showSearch, setShowSearch, title, showTop } = props;
   return (
     <div className="Bar-Busca-Header">
-      <Link to="/perfil">
-        <img src={userLogo} alt="Imagem User" className="Top-Btn" data-testid="profile-top-btn" />
+      <Link to="/perfil" className="Top-Btn">
+        <img src={userLogo} alt="Imagem User" data-testid="profile-top-btn" />
       </Link>
-      <div className="Bar-Busca-Header-text" data-testid="page-title">
+      <div data-testid="page-title" className="Bar-Busca-Header-text">
         <span>{title}</span>
       </div>
       {!showTop ? (
-        <Link onClick={() => setShowSearch(!showSearch)}>
+        <Link onClick={() => setShowSearch(!showSearch)} className="Top-Btn">
           <img
             src={searchLogo}
             alt="Search Logo"
             data-testid="search-top-btn"
-            className="Top-Btn"
           />
         </Link>
       ) : null}
