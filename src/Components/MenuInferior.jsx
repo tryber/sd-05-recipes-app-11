@@ -8,25 +8,22 @@ import '../CSS/MenuInferior.css';
 export default function MenuInferior() {
   return (
     <footer className="footer" data-testid="footer">
-      <Link to="/comidas">
+      <Link to="/comidas" className="footerBottom">
         <img
-          className="foodBottom"
           data-testid="food-bottom-btn"
           alt="food"
           src={mealIcon}
         />
       </Link>
-      <Link to="/explorar">
+      <Link to="/explorar" className="footerBottom">
         <img
-          className="exploreBottom"
           data-testid="explore-bottom-btn"
           alt="explore"
           src={exploreIcon}
         />
       </Link>
-      <Link to="/bebidas">
+      <Link to="/bebidas" className="footerBottom">
         <img
-          className="drinkBottom"
           data-testid="drinks-bottom-btn"
           alt="drink"
           src={drinkIcon}
