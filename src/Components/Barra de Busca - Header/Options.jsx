@@ -18,7 +18,7 @@ export default function Options() {
         <input
           id="nome"
           key="nome"
-          data-testid="name-search-radio"
+          data-testid="name-search-radio" 
           type="radio"
           value="nome"
           name="options"

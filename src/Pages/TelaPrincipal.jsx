@@ -2,21 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MenuInferior from '../Components/MenuInferior';
 import BarraBuscaHeader from '../Components/Barra de Busca - Header/BarraBuscaHeader';
+import ListReceitas from '../Components/ListReceitas';
 
 export default function TelaPrincipal(props) {
-  return (/comida/).test(props.match.path) ?
-  (
+  return /comida/.test(props.match.path) ? (
     <div>
       <BarraBuscaHeader title={'Comidas'} />
-      comidas
+      <ListReceitas />
       <MenuInferior />
     </div>
-  )
-  :
-  (
+  ) : (
     <div>
       <BarraBuscaHeader title={'Bebidas'} />
-      bebidas
+      <ListReceitas />
       <MenuInferior />
     </div>
   );

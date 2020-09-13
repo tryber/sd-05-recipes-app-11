@@ -33,7 +33,7 @@ function App() {
       <Route path="/receitas-favoritas" component={ReceitasFavoritas} />
       <Route path="/perfil" component={Perfil} />
       <Route exact path="/" component={Login} />
-      <Route render={() => <h1>Deu Ruim</h1>} />
+      <Route render={() => <h1 className="naoEncontrada">Página não encontrada</h1>} />
     </Switch>
   );
 }
