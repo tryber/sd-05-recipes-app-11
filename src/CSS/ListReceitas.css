@@ -1,9 +1,9 @@
-.listFoods {
+.listReceitas {
   display: flex;
   flex-flow: row wrap;
 }
 
-.food {
+.receita {
   background-color: whitesmoke;
   border-radius: 10px;
   box-shadow: 7px 5px 3px rgba(50, 50, 50, 0.77);
@@ -14,14 +14,14 @@
   width: 140px;
 }
 
-.imgFood {
+.imgReceita {
   border-radius: 10px 10px 0 0;
-  margin: 0;
   height: 90px;
+  margin: 0;
   width: 100%;
 }
 
-.textFood {
+.textReceita {
   margin: 5px 0;
   text-align: center;
 }

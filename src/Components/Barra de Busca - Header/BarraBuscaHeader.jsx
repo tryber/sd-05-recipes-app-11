@@ -5,10 +5,6 @@ import Search from './Search';
 import Options from './Options';
 import ButtonBuscar from './ButtonBuscar';
 
-function selectFilter() {
-
-}
-
 export default function BarraBuscaHeader(props) {
   const [showSearch, setShowSearch] = useState(false);
   const update = () => {

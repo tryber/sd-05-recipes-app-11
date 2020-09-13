@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import userLogo from '../../images/profileIcon.svg';
 import searchLogo from '../../images/searchIcon.svg';
+import ReceitasContext from '../../Context/ReceitasContext';
 import '../../CSS/HeaderBusca.css';
 
 export default function HeaderBusca(props) {
   const { showSearch, setShowSearch, title, showTop } = props;
+  const { setTitle } = useContext(ReceitasContext);
+
+  useEffect(() => {
+    setTitle(title);
+  }, [title]);
+
   return (
     <div className="Bar-Busca-Header">
       <Link to="/perfil" className="Top-Btn">
@@ -17,11 +24,7 @@ export default function HeaderBusca(props) {
       </div>
       {!showTop ? (
         <Link onClick={() => setShowSearch(!showSearch)} className="Top-Btn">
-          <img
-            src={searchLogo}
-            alt="Search Logo"
-            data-testid="search-top-btn"
-          />
+          <img src={searchLogo} alt="Search Logo" data-testid="search-top-btn" />
         </Link>
       ) : null}
     </div>
