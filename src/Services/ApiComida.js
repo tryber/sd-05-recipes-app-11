@@ -25,3 +25,12 @@ export const ApiSearchByMainIngredient = (mainIngredient) => (
         .catch((error) => error),
   )
 );
+
+export const searchMealById = (id) => (
+  fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`).then((response) =>
+    response
+      .json()
+      .then((meal) => meal.meals)
+      .catch((error) => error),
+  )
+);
