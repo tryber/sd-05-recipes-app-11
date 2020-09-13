@@ -19,7 +19,7 @@ function App() {
     <Switch>
       <Route path="/comidas/{id-da-receita}/in-progress" component={ProcessoReceitas} />
       <Route path="/bebidas/{id-da-receita}/in-progress" component={ProcessoReceitas} />
-      <Route path="/comidas/{id-da-receita}" component={DetalhesComidas} />
+      <Route path="/comidas/:id_da_receita" component={DetalhesComidas} />
       <Route exact path="/comidas" component={TelaInicial} />
       <Route exact path="/bebidas" component={TelaInicial} />
       <Route path="/bebidas/{id-da-receita}" component={DetalhesBebidas} />
@@ -33,7 +33,7 @@ function App() {
       <Route path="/receitas-favoritas" component={ReceitasFavoritas} />
       <Route path="/perfil" component={Perfil} />
       <Route exact path="/" component={Login} />
-      <Route render={() => <h1 className="naoEncontrada">Página não encontrada</h1>} />
+      {/* <Route render={() => <h1 className="naoEncontrada">Página não encontrada</h1>} /> */}
     </Switch>
   );
 }
