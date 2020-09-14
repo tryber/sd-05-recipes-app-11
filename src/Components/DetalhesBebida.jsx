@@ -53,6 +53,7 @@ export default function Detalhes(props) {
   } = props;
 
   const ingredientes = funcIngredients([], details);
+  console.log(details);
   return (
     <div>
       <img src={details.strDrinkThumb} alt={details.strDrink} data-testid="recipe-photo" />
