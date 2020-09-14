@@ -17,8 +17,8 @@ import ReceitasFavoritas from './Pages/TelaReceitasFavoritas';
 function App() {
   return (
     <Switch>
-      <Route path="/comidas/{id-da-receita}/in-progress" component={ProcessoReceitas} />
-      <Route path="/bebidas/{id-da-receita}/in-progress" component={ProcessoReceitas} />
+      <Route path="/comidas/:id_da_receita/in-progress" component={ProcessoReceitas} />
+      <Route path="/bebidas/:id_da_receita/in-progress" component={ProcessoReceitas} />
       <Route path="/comidas/:id_da_receita" component={DetalhesComidas} />
       <Route path="/bebidas/:id_da_receita" component={DetalhesBebidas} />
       <Route exact path="/comidas" component={TelaInicial} />

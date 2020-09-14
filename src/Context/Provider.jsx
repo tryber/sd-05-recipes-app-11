@@ -68,11 +68,17 @@ function filterBebidas(title, optionsValue, searchValue, setReceitas, setIsFetch
   }
 }
 
-function setupRecomendation(searchValue, setReceitas, setIsFetching, setSugestFood, setSugestDrink) {
+function setupRecomendation(
+  searchValue,
+  setReceitas,
+  setIsFetching,
+  setSugestFood,
+  setSugestDrink,
+) {
   searchCockTailByName('')
     .then((ListaBebidasPeloNome) => {
-      console.log(ListaBebidasPeloNome)
-      setSugestDrink(ListaBebidasPeloNome.slice(0,6));
+      console.log(ListaBebidasPeloNome);
+      setSugestDrink(ListaBebidasPeloNome.slice(0, 6));
     })
     .then(() => {
       setIsFetching(true);
@@ -80,7 +86,7 @@ function setupRecomendation(searchValue, setReceitas, setIsFetching, setSugestFo
 
   ApiSearchMealByName('')
     .then((ListaComidasPeloNome) => {
-      setSugestFood(ListaComidasPeloNome.slice(0,6));
+      setSugestFood(ListaComidasPeloNome.slice(0, 6));
     })
     .then(() => {
       setIsFetching(true);
@@ -119,10 +125,12 @@ export default function Provider(props) {
     setupRecomendation(searchValue, setReceitas, setIsFetching, setSugestFood, setSugestDrink);
   }, []);
   useEffect(() => {
-    if (title === 'Comidas')
+    if (title === 'Comidas') {
       filterComidas(title, optionsValue, searchValue, setReceitas, setIsFetching);
-    if (title === 'Bebidas')
+    }
+    if (title === 'Bebidas') {
       filterBebidas(title, optionsValue, searchValue, setReceitas, setIsFetching);
+    }
   }, [changeFilter]);
 
   return <ReceitasContext.Provider value={state}>{props.children}</ReceitasContext.Provider>;
