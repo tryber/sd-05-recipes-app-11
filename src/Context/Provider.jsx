@@ -68,6 +68,25 @@ function filterBebidas(title, optionsValue, searchValue, setReceitas, setIsFetch
   }
 }
 
+function setupRecomendation(searchValue, setReceitas, setIsFetching, setSugestFood, setSugestDrink) {
+  searchCockTailByName('')
+    .then((ListaBebidasPeloNome) => {
+      console.log(ListaBebidasPeloNome)
+      setSugestDrink(ListaBebidasPeloNome.slice(0,6));
+    })
+    .then(() => {
+      setIsFetching(true);
+    });
+
+  ApiSearchMealByName('')
+    .then((ListaComidasPeloNome) => {
+      setSugestFood(ListaComidasPeloNome.slice(0,6));
+    })
+    .then(() => {
+      setIsFetching(true);
+    });
+}
+
 export default function Provider(props) {
   const [isFetching, setIsFetching] = useState(false);
   const [receitas, setReceitas] = useState([]);
@@ -75,6 +94,8 @@ export default function Provider(props) {
   const [searchValue, setSearchValue] = useState('');
   const [changeFilter, setchangeFilter] = useState(0);
   const [title, setTitle] = useState('');
+  const [sugestDrink, setSugestDrink] = useState([]);
+  const [sugestFood, setSugestFood] = useState([]);
 
   const state = {
     isFetching,
@@ -89,11 +110,19 @@ export default function Provider(props) {
     setSearchValue,
     setchangeFilter,
     setTitle,
+    sugestDrink,
+    setSugestDrink,
+    sugestFood,
+    setSugestFood,
   };
-
   useEffect(() => {
-    if (title === 'Comidas') filterComidas(title, optionsValue, searchValue, setReceitas, setIsFetching);
-    if (title === 'Bebidas') filterBebidas(title, optionsValue, searchValue, setReceitas, setIsFetching);
+    setupRecomendation(searchValue, setReceitas, setIsFetching, setSugestFood, setSugestDrink);
+  }, []);
+  useEffect(() => {
+    if (title === 'Comidas')
+      filterComidas(title, optionsValue, searchValue, setReceitas, setIsFetching);
+    if (title === 'Bebidas')
+      filterBebidas(title, optionsValue, searchValue, setReceitas, setIsFetching);
   }, [changeFilter]);
 
   return <ReceitasContext.Provider value={state}>{props.children}</ReceitasContext.Provider>;
