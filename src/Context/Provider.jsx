@@ -12,11 +12,26 @@ import {
   ApiSearchByMainIngredient,
 } from '../Services/ApiComida';
 
+function noElements(arr) {
+  if (!arr) {
+    window.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    return null;
+  }
+  return arr.length === 0
+    ? window.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
+    : null;
+}
+
 function filterComidas(title, optionsValue, searchValue, setReceitas, setIsFetching) {
   if (optionsValue === 'primeiraLetra') {
+    if (searchValue.length !== 1) {
+      window.alert('Sua busca deve conter somente 1 (um) caracter');
+      return null;
+    }
     ApiSearchByFirstLetter(searchValue)
       .then((ListaComidasPelaPrimeiraLetra) => {
         setReceitas(ListaComidasPelaPrimeiraLetra);
+        noElements(ListaComidasPelaPrimeiraLetra);
       })
       .then(() => {
         setIsFetching(true);
@@ -25,6 +40,7 @@ function filterComidas(title, optionsValue, searchValue, setReceitas, setIsFetch
     ApiSearchByMainIngredient(searchValue)
       .then((ListaComidasPorIngrediente) => {
         setReceitas(ListaComidasPorIngrediente);
+        noElements(ListaComidasPorIngrediente);
       })
       .then(() => {
         setIsFetching(true);
@@ -33,18 +49,25 @@ function filterComidas(title, optionsValue, searchValue, setReceitas, setIsFetch
     ApiSearchMealByName(searchValue)
       .then((ListaComidasPeloNome) => {
         setReceitas(ListaComidasPeloNome);
+        noElements(ListaComidasPeloNome);
       })
       .then(() => {
         setIsFetching(true);
       });
   }
+  return null;
 }
 
 function filterBebidas(title, optionsValue, searchValue, setReceitas, setIsFetching) {
   if (optionsValue === 'primeiraLetra') {
+    if (searchValue.length !== 1) {
+      window.alert('Sua busca deve conter somente 1 (um) caracter');
+      return null;
+    }
     searchCockTailByLetter(searchValue)
       .then((ListaBebidasPelaPrimeiraLetra) => {
         setReceitas(ListaBebidasPelaPrimeiraLetra);
+        noElements(ListaBebidasPelaPrimeiraLetra);
       })
       .then(() => {
         setIsFetching(true);
@@ -53,6 +76,7 @@ function filterBebidas(title, optionsValue, searchValue, setReceitas, setIsFetch
     searchCockTailByIngredient(searchValue)
       .then((ListaBebidasPorIngrediente) => {
         setReceitas(ListaBebidasPorIngrediente);
+        noElements(ListaBebidasPorIngrediente);
       })
       .then(() => {
         setIsFetching(true);
@@ -61,11 +85,13 @@ function filterBebidas(title, optionsValue, searchValue, setReceitas, setIsFetch
     searchCockTailByName(searchValue)
       .then((ListaBebidasPeloNome) => {
         setReceitas(ListaBebidasPeloNome);
+        noElements(ListaBebidasPeloNome);
       })
       .then(() => {
         setIsFetching(true);
       });
   }
+  return null;
 }
 
 function setupRecomendation(
@@ -77,7 +103,6 @@ function setupRecomendation(
 ) {
   searchCockTailByName('')
     .then((ListaBebidasPeloNome) => {
-      console.log(ListaBebidasPeloNome);
       setSugestDrink(ListaBebidasPeloNome.slice(0, 6));
     })
     .then(() => {
@@ -125,10 +150,10 @@ export default function Provider(props) {
     setupRecomendation(searchValue, setReceitas, setIsFetching, setSugestFood, setSugestDrink);
   }, []);
   useEffect(() => {
-    if (title === 'Comidas') {
+    if (title === 'comidas') {
       filterComidas(title, optionsValue, searchValue, setReceitas, setIsFetching);
     }
-    if (title === 'Bebidas') {
+    if (title === 'bebidas') {
       filterBebidas(title, optionsValue, searchValue, setReceitas, setIsFetching);
     }
   }, [changeFilter]);
