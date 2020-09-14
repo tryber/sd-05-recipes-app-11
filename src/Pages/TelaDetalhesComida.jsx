@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { searchMealById } from '../Services/ApiComida';
 import ReactPlayer from 'react-player';
+import { searchMealById } from '../Services/ApiComida';
 
 export default function TelaDetalhesComida(props) {
   const [details, setDetails] = useState(undefined);
@@ -15,21 +15,22 @@ export default function TelaDetalhesComida(props) {
   }
   const ingredientes = [];
   console.log(details);
-  for (let i = 1; i <= 20; i++) {
-    if (details[`strIngredient${i}`] !== null && details[`strIngredient${i}`] !== '')
+  for (let i = 0; i < 20; i += 1) {
+    if (details[`strIngredient${i}`] !== null && details[`strIngredient${i}`] !== '') {
       ingredientes.push({
         ingrediente: details[`strIngredient${i}`],
         quantidade: details[`strMeasure${i}`],
       });
+    }
   }
   return (
     <div>
       <h1>{details.strMeal}</h1>
-      <img src={details.strMealThumb} />
+      <img src={details.strMealThumb} alt={details.strMeal} />
       <h5>{details.strCategory}</h5>
       <h3>Ingredientes</h3>
       <ul>
-        {ingredientes.map((ingrediente, index) => (
+        {ingredientes.map((ingrediente /* , index */) => (
           <li>
             {ingrediente.quantidade} - {ingrediente.ingrediente}
           </li>
@@ -43,5 +44,8 @@ export default function TelaDetalhesComida(props) {
   );
 }
 
-/* Essa tela deve conter uma imagem da receita, o título, a categoria (ou se é ou não alcoólico), uma lista de ingredientes seguidos pelas quantidades, instruções, um vídeo do youtube "embedado" e recomendações. 
-Obs.: O vídeo do youtube só deve estar disponível para receitas de comida, já que não é retornado pela API de bebidas. */
+/* Essa tela deve conter uma imagem da receita, o título, a categoria (ou se é ou não alcoólico),
+uma lista de ingredientes seguidos pelas quantidades, instruções, um vídeo do youtube "embedado"
+e recomendações.
+Obs.: O vídeo do youtube só deve estar disponível para receitas de comida, já que não é retornado
+pela API de bebidas. */

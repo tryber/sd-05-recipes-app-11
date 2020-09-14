@@ -4,8 +4,14 @@ import { Link } from 'react-router-dom';
 
 export default function Receita(props) {
   const { receita } = props;
+  let tipo = 'comidas';
+  let id = receita.idMeal;
+  if (receita.strDrink) {
+    tipo = 'bebidas';
+    id = receita.idDrink;
+  }
   return (
-    <Link to={`/comidas/${receita.idMeal}`}>
+    <Link to={`/${tipo}/${id}`}>
       <div className="receita">
         <img
           className="imgReceita"
@@ -20,5 +26,4 @@ export default function Receita(props) {
 
 Receita.propTypes = {
   receita: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
-  /* receita: PropTypes.array.isRequired, */
 };
