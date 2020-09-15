@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-
 import propTypes from 'prop-types';
 import { searchCockTailById } from '../Services/ApiBebida';
 /* import blackHeart from '../images/blackHeartIcon.svg';
@@ -8,7 +7,7 @@ import shareIcon from '../images/shareIcon.svg';
 import Card from '../Components/CardRecomend.jsx'; */
 import context from '../Context/ReceitasContext';
 import DetalhesBebida from '../Components/DetalhesBebida';
-import { done, favoriteRecipes, updateStatus } from './TelaDetalhesComida';
+import { updateStatus } from './TelaDetalhesComida';
 
 
 /* function loopIndex(indexArr, IndexAtual) {
@@ -97,7 +96,6 @@ export default function TelaDetalhesBebida(props) {
     });
     updateStatus(idDaReceita, setStatus, setFavoriteRecipes, 'cocktails');
   }, []);
-  console.log(props)
   if (!details) {
     return <h1>Carregando</h1>;
   }

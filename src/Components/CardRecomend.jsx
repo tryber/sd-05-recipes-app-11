@@ -9,7 +9,7 @@ export default function Card(props) {
   }
 
   return (
-    <div style={visible?null:{display:'none'}}>
+    <div style={visible ? null : { display: 'none' }}>
       <img
         src={source}
         alt=""
@@ -25,4 +25,5 @@ Card.propTypes = {
   title: propTypes.string.isRequired,
   index: propTypes.number.isRequired,
   source: propTypes.string.isRequired,
+  show: propTypes.number.isRequired,
 };

@@ -24,7 +24,7 @@ export function favoriteRecipes(setFavoriteRecipes, id) {
       return setFavoriteRecipes(true);
     }
   }
-  setFavoriteRecipes(false)
+  setFavoriteRecipes(false);
   return null;
 }
 function inProgressRecipes(setStatus, id, tipo) {
@@ -54,9 +54,9 @@ export default function TelaDetalhesComida(props) {
   useEffect(() => {
     searchMealById(idDaReceita).then((resposta) => {
       if (!resposta) {
-        return null
+        return null;
       }
-      setDetails(resposta[0]);
+      return setDetails(resposta[0]);
     });
     updateStatus(idDaReceita, setStatus, setFavorite, 'meals');
   }, []);

@@ -5,7 +5,7 @@ import Card from './CardRecomend.jsx';
 import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
-import { loopIndex, funcIngredients, convertFavorite, CopyURL } from './DetalhesComida';
+import { funcIngredients, convertFavorite, CopyURL } from './DetalhesComida';
 import '../CSS/DetalhesComida.css';
 
 /* export function loopIndex(indexArr, IndexAtual) {
@@ -46,63 +46,47 @@ function ReverseArrayFoto(sugestFood, indexRecom, setIndexRecom) {
       ))
   );
 }
+function isAlcoholic(details) {
+  return details.strAlcoholic.indexOf('Alcoholic') >= 0 ? 'Alcoholic' : '';
+}
 
-/* export function funcIngredients(ingredientes, details) {
-  for (let i = 1; i < 20; i += 1) {
-    if (
-      details[`strIngredient${i}`] !== null &&
-      details[`strIngredient${i}`] !== '' &&
-      details[`strIngredient${i}`] !== undefined
-    ) {
-      ingredientes.push({
-        ingrediente: details[`strIngredient${i}`],
-        quantidade: details[`strMeasure${i}`],
-      });
-    }
-  }
-  return ingredientes;
-} */
+function funcLinks(details, favority, setFavority, copy, copiador) {
+  return (
+    <div>
+      <h1 data-testid="recipe-title">{details.strDrink}</h1>
+      <Link onClick={() => convertFavorite(details, setFavority)}>
+        <img src={favority ? blackHeart : whiteHeart} alt="like icon" data-testid="favorite-btn" />
+      </Link>
+      <Link
+        onClick={() => {
+          copiador(true);
+          CopyURL();
+        }}
+      >
+        <img src={shareIcon} alt="like icon" data-testid={'share-btn'} />
+      </Link>
+      {copy ? <span>Link copiado!</span> : null}
+    </div>
+  );
+}
 
 export default function Detalhes(props) {
-  console.log(props)
+  console.log(props);
   const [favority, setFavority] = useState(false);
   const [copy, copiador] = useState(false);
   const {
-    details,
-    favoriteRecipes,
-    status,
-    indexRecom,
-    setIndexRecom,
-    sugestFood,
-    idDaReceita,
+    details, favoriteRecipes, status,
+    indexRecom, setIndexRecom, sugestFood, idDaReceita,
   } = props;
   useEffect(() => {
     setFavority(favoriteRecipes);
   }, []);
   const ingredientes = funcIngredients([], details);
-  const Alcoholic = details.strAlcoholic.indexOf('Alcoholic') >= 0 ? 'Alcoholic' : '';
+  const Alcoholic = isAlcoholic(details);
   return (
     <div>
       <img src={details.strDrinkThumb} alt={details.strDrink} data-testid="recipe-photo" />
-      <div>
-        <h1 data-testid="recipe-title">{details.strDrink}</h1>
-        <Link onClick={() => convertFavorite(details, setFavority)}>
-          <img
-            src={favority ? blackHeart : whiteHeart}
-            alt="like icon"
-            data-testid="favorite-btn"
-          />
-        </Link>
-        <Link
-          onClick={(e) => {
-            copiador(true);
-            CopyURL();
-          }}
-        >
-          <img src={shareIcon} alt="like icon" data-testid={'share-btn'} />
-        </Link>
-        {copy ? <span>Link copiado!</span> : null}
-      </div>
+      {funcLinks(details, favority, setFavority, copy, copiador)}
       <h5 data-testid="recipe-category">{`${details.strCategory}-${Alcoholic}`}</h5>
       <h3>Ingredients</h3>
       <ul>

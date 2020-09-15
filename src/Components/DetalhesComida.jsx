@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
@@ -7,11 +7,8 @@ import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import '../CSS/DetalhesComida.css';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import userEvent from '@testing-library/user-event';
 
-function convertFoodDone(food) {
+/* function convertFoodDone(food) {
   console.log(food);
   const saida = {
     id: food.idMeal,
@@ -21,28 +18,28 @@ function convertFoodDone(food) {
     alcoholicOrNot: 'Not',
     name: food.strMeal,
     image: food.strMealThumb,
-    /* doneDate, */
+    doneDate,
     tags: food.strTags,
   };
   console.log(saida);
   return saida;
-}
+} */
 
 function addFavority(receita, setFavority) {
-  let oldFavority = localStorage.getItem('favoriteRecipes');
-  if (!oldFavority) {
+  let oldFav = localStorage.getItem('favoriteRecipes');
+  if (!oldFav) {
     setFavority(true);
     return localStorage.setItem('favoriteRecipes', JSON.stringify([receita]));
   }
-  oldFavority = [...JSON.parse(oldFavority)];
-  if (oldFavority.find((el) => el.id === receita.id)) {
+  oldFav = [...JSON.parse(oldFav)];
+  if (oldFav.find((el) => el.id === receita.id)) {
     setFavority(false);
     return localStorage.setItem(
       'favoriteRecipes',
-      JSON.stringify(oldFavority.filter((el) => el.id !== receita.id))
+      JSON.stringify(oldFav.filter((el) => el.id !== receita.id)),
     );
   }
-  const temp = [...oldFavority, receita];
+  const temp = [...oldFav, receita];
   setFavority(true);
   return localStorage.setItem('favoriteRecipes', JSON.stringify(temp));
 }
@@ -68,9 +65,9 @@ export function convertFavorite(food, setFavority) {
   return saida;
 }
 
-export function uploadDoneRecipes(receita) {
+/* export function uploadDoneRecipes(receita) {
   const { id, type, area, category, alcoholicOrNot, name, image, doneDate, tags } = receita;
-}
+} */
 
 export function loopIndex(indexArr, IndexAtual) {
   let index = indexArr;
@@ -131,6 +128,25 @@ export function funcIngredients(ingredientes, details) {
 export function CopyURL() {
   window.navigator.clipboard.writeText(window.location.toString());
 }
+function funcLinks(details, favority, setFavority, copiador, copy) {
+  return (
+    <div>
+      <h1 data-testid="recipe-title">{details.strMeal}</h1>
+      <Link onClick={() => convertFavorite(details, setFavority)}>
+        <img src={favority ? blackHeart : whiteHeart} alt="like icon" data-testid="favorite-btn" />
+      </Link>
+      <Link
+        onClick={() => {
+          copiador(true);
+          CopyURL();
+        }}
+      >
+        <img src={shareIcon} alt="like icon" data-testid={'share-btn'} />
+      </Link>
+      {copy ? <span>Link copiado!</span> : null}
+    </div>
+  );
+}
 
 export default function Detalhes(props) {
   const [favority, setFavority] = useState(false);
@@ -144,33 +160,13 @@ export default function Detalhes(props) {
     sugestDrink,
     idDaReceita,
   } = props;
-  useEffect(() => {
-    setFavority(favoriteRecipes);
-  }, []);
-  
+  useEffect(() => setFavority(favoriteRecipes), []);
+
   const novosIngredientes = funcIngredients([], details);
   return (
     <div>
       <img src={details.strMealThumb} alt={details.strMeal} data-testid="recipe-photo" />
-      <div>
-        <h1 data-testid="recipe-title">{details.strMeal}</h1>
-        <Link onClick={() => convertFavorite(details, setFavority)}>
-          <img
-            src={favority ? blackHeart : whiteHeart}
-            alt="like icon"
-            data-testid="favorite-btn"
-          />
-        </Link>
-        <Link
-          onClick={(e) => {
-            copiador(true);
-            CopyURL();
-          }}
-        >
-          <img src={shareIcon} alt="like icon" data-testid={'share-btn'} />
-        </Link>
-        {copy ? <span>Link copiado!</span> : null}
-      </div>
+      {funcLinks(details, favority, setFavority, copiador, copy)}
       <h5 data-testid="recipe-category">{details.strCategory}</h5>
       <h3>Ingredients</h3>
       <ul>
