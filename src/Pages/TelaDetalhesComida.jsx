@@ -24,12 +24,13 @@ export function favoriteRecipes(setFavoriteRecipes, id) {
       return setFavoriteRecipes(true);
     }
   }
+  setFavoriteRecipes(false)
   return null;
 }
-function inProgressRecipes(setStatus, id) {
+function inProgressRecipes(setStatus, id, tipo) {
   let inProgressRecipesVar = localStorage.getItem('inProgressRecipes');
   if (inProgressRecipesVar) {
-    inProgressRecipesVar = JSON.parse(inProgressRecipesVar).meals;
+    inProgressRecipesVar = JSON.parse(inProgressRecipesVar)[tipo];
     inProgressRecipesVar = inProgressRecipesVar[id];
     if (inProgressRecipesVar) {
       return setStatus('inProgressRecipes');
@@ -37,10 +38,10 @@ function inProgressRecipes(setStatus, id) {
   }
   return null;
 }
-export function updateStatus(id, setStatus, setFavoriteRecipes) {
+export function updateStatus(id, setStatus, setFavoriteRecipes, tipo) {
   done(setStatus, id);
   favoriteRecipes(setFavoriteRecipes, id);
-  inProgressRecipes(setStatus, id);
+  inProgressRecipes(setStatus, id, tipo);
   return null;
 }
 export default function TelaDetalhesComida(props) {
@@ -52,9 +53,12 @@ export default function TelaDetalhesComida(props) {
   const { id_da_receita: idDaReceita } = props.match.params;
   useEffect(() => {
     searchMealById(idDaReceita).then((resposta) => {
+      if (!resposta) {
+        return null
+      }
       setDetails(resposta[0]);
     });
-    updateStatus(idDaReceita, setStatus, setFavorite);
+    updateStatus(idDaReceita, setStatus, setFavorite, 'meals');
   }, []);
   if (!details) {
     return <h1>Carregando</h1>;

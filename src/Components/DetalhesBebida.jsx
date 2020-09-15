@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Card from './CardRecomend.jsx';
 import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
-import { loopIndex, funcIngredients } from './DetalhesComida';
+import { loopIndex, funcIngredients, convertFavorite, CopyURL } from './DetalhesComida';
+import '../CSS/DetalhesComida.css';
 
 /* export function loopIndex(indexArr, IndexAtual) {
   let index = indexArr;
@@ -16,18 +17,34 @@ import { loopIndex, funcIngredients } from './DetalhesComida';
 function ReverseArrayFoto(sugestFood, indexRecom, setIndexRecom) {
   if (indexRecom < 0) {
     setIndexRecom(5);
-    return sugestFood
-      .filter((_, index) => index === 5 % 6 || loopIndex(index - 1, 5))
-      .reverse()
-      .map((item, index) => (
-        <Card key={item.strMeal} title={item.strMeal} index={index} source={item.strMealThumb} />
-      ));
+    return (
+      sugestFood
+        /* .filter((_, index) => index === 5 % 6 || loopIndex(index - 1, 5))
+      .reverse() */
+        .map((item, index) => (
+          <Card
+            key={item.strMeal}
+            title={item.strMeal}
+            index={index}
+            source={item.strMealThumb}
+            show={indexRecom}
+          />
+        ))
+    );
   }
-  return sugestFood
-    .filter((_, index) => index === indexRecom % 6 || loopIndex(index - 1, indexRecom))
-    .map((item, index) => (
-      <Card key={item.strMeal} title={item.strMeal} index={index} source={item.strMealThumb} />
-    ));
+  return (
+    sugestFood
+      /*  .filter((_, index) => index === indexRecom % 6 || loopIndex(index - 1, indexRecom)) */
+      .map((item, index) => (
+        <Card
+          key={item.strMeal}
+          title={item.strMeal}
+          index={index}
+          source={item.strMealThumb}
+          show={indexRecom}
+        />
+      ))
+  );
 }
 
 /* export function funcIngredients(ingredientes, details) {
@@ -47,26 +64,46 @@ function ReverseArrayFoto(sugestFood, indexRecom, setIndexRecom) {
 } */
 
 export default function Detalhes(props) {
+  console.log(props)
+  const [favority, setFavority] = useState(false);
+  const [copy, copiador] = useState(false);
   const {
-    details, favoriteRecipes, status, indexRecom,
-    setIndexRecom, sugestFood, idDaReceita,
+    details,
+    favoriteRecipes,
+    status,
+    indexRecom,
+    setIndexRecom,
+    sugestFood,
+    idDaReceita,
   } = props;
-
+  useEffect(() => {
+    setFavority(favoriteRecipes);
+  }, []);
   const ingredientes = funcIngredients([], details);
-  console.log(details);
+  const Alcoholic = details.strAlcoholic.indexOf('Alcoholic') >= 0 ? 'Alcoholic' : '';
   return (
     <div>
       <img src={details.strDrinkThumb} alt={details.strDrink} data-testid="recipe-photo" />
       <div>
         <h1 data-testid="recipe-title">{details.strDrink}</h1>
-        <img
-          src={favoriteRecipes ? blackHeart : whiteHeart}
-          alt="like icon"
-          data-testid="favorite-btn"
-        />
-        <img src={shareIcon} alt="like icon" data-testid={'share-btn'} />
+        <Link onClick={() => convertFavorite(details, setFavority)}>
+          <img
+            src={favority ? blackHeart : whiteHeart}
+            alt="like icon"
+            data-testid="favorite-btn"
+          />
+        </Link>
+        <Link
+          onClick={(e) => {
+            copiador(true);
+            CopyURL();
+          }}
+        >
+          <img src={shareIcon} alt="like icon" data-testid={'share-btn'} />
+        </Link>
+        {copy ? <span>Link copiado!</span> : null}
       </div>
-      <h5 data-testid="recipe-category">{details.strCategory}</h5>
+      <h5 data-testid="recipe-category">{`${details.strCategory}-${Alcoholic}`}</h5>
       <h3>Ingredients</h3>
       <ul>
         {ingredientes.map((item, index) => (
@@ -84,9 +121,9 @@ export default function Detalhes(props) {
         <button onClick={() => setIndexRecom(indexRecom + 1)}>{'>'}</button>
       </div>
       {status === 'done' ? null : (
-        <Link to={`/comidas/${idDaReceita}/in-progress`}>
-          <button data-testid="start-recipe-btn">
-            {status === 'noting' ? 'Inicia Receita' : 'Continuar Receita'}
+        <Link to={`/bebidas/${idDaReceita}/in-progress`}>
+          <button data-testid="start-recipe-btn" className="start-recipe-btn">
+            {status === 'nothing' ? 'Inicia Receita' : 'Continuar Receita'}
           </button>
         </Link>
       )}

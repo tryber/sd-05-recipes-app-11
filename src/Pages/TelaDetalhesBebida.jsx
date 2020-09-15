@@ -8,7 +8,8 @@ import shareIcon from '../images/shareIcon.svg';
 import Card from '../Components/CardRecomend.jsx'; */
 import context from '../Context/ReceitasContext';
 import DetalhesBebida from '../Components/DetalhesBebida';
-import { done, favoriteRecipes } from './TelaDetalhesComida';
+import { done, favoriteRecipes, updateStatus } from './TelaDetalhesComida';
+
 
 /* function loopIndex(indexArr, IndexAtual) {
   let index = indexArr;
@@ -66,7 +67,7 @@ import { done, favoriteRecipes } from './TelaDetalhesComida';
   }
   return null;
 } */
-function inProgressRecipes(setStatus, id) {
+/* function inProgressRecipes(setStatus, id) {
   let inProgressRecipesVar = localStorage.getItem('inProgressRecipes');
   if (inProgressRecipesVar) {
     inProgressRecipesVar = JSON.parse(inProgressRecipesVar).drinks;
@@ -76,13 +77,13 @@ function inProgressRecipes(setStatus, id) {
     }
   }
   return null;
-}
-function updateStatus(id, setStatus, setFavoriteRecipes) {
+} */
+/* function updateStatus(id, setStatus, setFavoriteRecipes) {
   done(setStatus, id);
   favoriteRecipes(setFavoriteRecipes, id);
   inProgressRecipes(setStatus, id);
   return null;
-}
+} */
 export default function TelaDetalhesBebida(props) {
   const { sugestFood } = useContext(context);
   const [details, setDetails] = useState(undefined);
@@ -94,8 +95,9 @@ export default function TelaDetalhesBebida(props) {
     searchCockTailById(idDaReceita).then((resposta) => {
       setDetails(resposta[0]);
     });
-    updateStatus(idDaReceita, setStatus, setFavoriteRecipes);
+    updateStatus(idDaReceita, setStatus, setFavoriteRecipes, 'cocktails');
   }, []);
+  console.log(props)
   if (!details) {
     return <h1>Carregando</h1>;
   }
@@ -109,6 +111,7 @@ export default function TelaDetalhesBebida(props) {
       setIndexRecom={setIndexRecom}
       sugestFood={sugestFood}
       idDaReceita={idDaReceita}
+      match={props.match}
     />
   );
 }

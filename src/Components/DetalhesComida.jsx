@@ -6,6 +6,71 @@ import Card from './CardRecomend.jsx';
 import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
+import '../CSS/DetalhesComida.css';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import userEvent from '@testing-library/user-event';
+
+function convertFoodDone(food) {
+  console.log(food);
+  const saida = {
+    id: food.idMeal,
+    type: 'comida',
+    area: food.strArea,
+    category: food.strCategory,
+    alcoholicOrNot: 'Not',
+    name: food.strMeal,
+    image: food.strMealThumb,
+    /* doneDate, */
+    tags: food.strTags,
+  };
+  console.log(saida);
+  return saida;
+}
+
+function addFavority(receita, setFavority) {
+  let oldFavority = localStorage.getItem('favoriteRecipes');
+  if (!oldFavority) {
+    setFavority(true);
+    return localStorage.setItem('favoriteRecipes', JSON.stringify([receita]));
+  }
+  oldFavority = [...JSON.parse(oldFavority)];
+  if (oldFavority.find((el) => el.id === receita.id)) {
+    setFavority(false);
+    return localStorage.setItem(
+      'favoriteRecipes',
+      JSON.stringify(oldFavority.filter((el) => el.id !== receita.id))
+    );
+  }
+  const temp = [...oldFavority, receita];
+  setFavority(true);
+  return localStorage.setItem('favoriteRecipes', JSON.stringify(temp));
+}
+
+export function convertFavorite(food, setFavority) {
+  let type = 'Drink';
+
+  if (food.idMeal) {
+    type = 'Meal';
+  }
+  const saida = {
+    id: food[`id${type}`],
+    type: type === 'Drink' ? 'bebida' : 'comida',
+    category: food.strCategory,
+    alcoholicOrNot: type === 'Meal' ? '' : 'Alcoholic',
+    name: food[`str${type}`],
+    image: food[`str${type}Thumb`],
+    area: food.strArea !== undefined ? food.strArea : '',
+    /* doneDate, */
+    /*  tags: food.strTags, */
+  };
+  addFavority(saida, setFavority);
+  return saida;
+}
+
+export function uploadDoneRecipes(receita) {
+  const { id, type, area, category, alcoholicOrNot, name, image, doneDate, tags } = receita;
+}
 
 export function loopIndex(indexArr, IndexAtual) {
   let index = indexArr;
@@ -16,18 +81,34 @@ export function loopIndex(indexArr, IndexAtual) {
 function ReverseArrayFoto(sugestDrink, indexRecom, setIndexRecom) {
   if (indexRecom < 0) {
     setIndexRecom(5);
-    return sugestDrink
-      .filter((_, index) => index === 5 % 6 || loopIndex(index - 1, 5))
-      .reverse()
-      .map((item, index) => (
-        <Card key={item.strDrink} title={item.strDrink} index={index} source={item.strDrinkThumb} />
-      ));
+    return (
+      sugestDrink
+        /* .filter((_, index) => index === 5 % 6 || loopIndex(index - 1, 5))
+      .reverse() */
+        .map((item, index) => (
+          <Card
+            key={item.strDrink}
+            title={item.strDrink}
+            index={index}
+            source={item.strDrinkThumb}
+            show={indexRecom}
+          />
+        ))
+    );
   }
-  return sugestDrink
-    .filter((_, index) => index === indexRecom % 6 || loopIndex(index - 1, indexRecom))
-    .map((item, index) => (
-      <Card key={item.strDrink} title={item.strDrink} index={index} source={item.strDrinkThumb} />
-    ));
+  return (
+    sugestDrink
+      /* .filter((_, index) => index === indexRecom % 6 || loopIndex(index - 1, indexRecom)) */
+      .map((item, index) => (
+        <Card
+          key={item.strDrink}
+          title={item.strDrink}
+          index={index}
+          source={item.strDrinkThumb}
+          show={indexRecom}
+        />
+      ))
+  );
 }
 
 export function funcIngredients(ingredientes, details) {
@@ -46,24 +127,49 @@ export function funcIngredients(ingredientes, details) {
   return ingredientes;
 }
 
-export default function Detalhes(props) {
-  const {
-    details, favoriteRecipes, status, indexRecom,
-    setIndexRecom, sugestDrink, idDaReceita,
-  } = props;
+// HA https://www.codegrepper.com/code-examples/basic/copy+string+to+clipboard+javascript
+export function CopyURL() {
+  window.navigator.clipboard.writeText(window.location.toString());
+}
 
+export default function Detalhes(props) {
+  const [favority, setFavority] = useState(false);
+  const [copy, copiador] = useState(false);
+  const {
+    details,
+    favoriteRecipes,
+    status,
+    indexRecom,
+    setIndexRecom,
+    sugestDrink,
+    idDaReceita,
+  } = props;
+  useEffect(() => {
+    setFavority(favoriteRecipes);
+  }, []);
+  
   const novosIngredientes = funcIngredients([], details);
   return (
     <div>
       <img src={details.strMealThumb} alt={details.strMeal} data-testid="recipe-photo" />
       <div>
         <h1 data-testid="recipe-title">{details.strMeal}</h1>
-        <img
-          src={favoriteRecipes ? blackHeart : whiteHeart}
-          alt="like icon"
-          data-testid="favorite-btn"
-        />
-        <img src={shareIcon} alt="like icon" data-testid={'share-btn'} />
+        <Link onClick={() => convertFavorite(details, setFavority)}>
+          <img
+            src={favority ? blackHeart : whiteHeart}
+            alt="like icon"
+            data-testid="favorite-btn"
+          />
+        </Link>
+        <Link
+          onClick={(e) => {
+            copiador(true);
+            CopyURL();
+          }}
+        >
+          <img src={shareIcon} alt="like icon" data-testid={'share-btn'} />
+        </Link>
+        {copy ? <span>Link copiado!</span> : null}
       </div>
       <h5 data-testid="recipe-category">{details.strCategory}</h5>
       <h3>Ingredients</h3>
@@ -86,8 +192,8 @@ export default function Detalhes(props) {
       </div>
       {status === 'done' ? null : (
         <Link to={`/comidas/${idDaReceita}/in-progress`}>
-          <button data-testid="start-recipe-btn">
-            {status === 'noting' ? 'Inicia Receita' : 'Continuar Receita'}
+          <button data-testid="start-recipe-btn" className="start-recipe-btn">
+            {status === 'nothing' ? 'Inicia Receita' : 'Continuar Receita'}
           </button>
         </Link>
       )}
