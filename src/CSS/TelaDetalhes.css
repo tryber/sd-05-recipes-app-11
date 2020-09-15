@@ -39,6 +39,11 @@
   padding: 20px;
 }
 
+.recomendation-card {
+  color: white;
+  text-decoration: none;
+}
+
 .recomendation-title {
   text-align: center;
 }

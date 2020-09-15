@@ -73,6 +73,7 @@ export default function TelaDetalhesComida(props) {
       setIndexRecom={setIndexRecom}
       sugestDrink={sugestDrink}
       idDaReceita={idDaReceita}
+      location={props.location}
     />
   );
 }

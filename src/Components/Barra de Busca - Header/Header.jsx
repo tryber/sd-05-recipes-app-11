@@ -6,13 +6,23 @@ import searchLogo from '../../images/searchIcon.svg';
 import ReceitasContext from '../../Context/ReceitasContext';
 import '../../CSS/HeaderBusca.css';
 
+function firstUpCase(texto = '') {
+  let palavras = texto.split(' ');
+  palavras = palavras.map((palavra) => {
+    const first = palavra[0].toUpperCase();
+    const rest = palavra.slice(1);
+    return first + rest;
+  });
+  return palavras.join(' ');
+}
+
 export default function HeaderBusca(props) {
   const { showSearch, setShowSearch, title, showTop } = props;
   const { setTitle } = useContext(ReceitasContext);
   useEffect(() => {
     setTitle(title);
   }, [title]);
-  const newTitle = title === 'comidas' ? 'Comidas' : 'Bebidas';
+  const newTitle = firstUpCase(title);
 
   return (
     <div className="Bar-Busca-Header">

@@ -22,7 +22,7 @@ function fotoPrincipal(details) {
   );
 }
 
-function ReverseArrayFoto(sugestFood, indexRecom, setIndexRecom) {
+function ReverseArrayFoto(sugestFood, indexRecom, setIndexRecom, location) {
   if (indexRecom < 0) {
     setIndexRecom(5);
     return (
@@ -36,6 +36,7 @@ function ReverseArrayFoto(sugestFood, indexRecom, setIndexRecom) {
             index={index}
             source={item.strMealThumb}
             show={indexRecom}
+            location={location}
           />
         ))
     );
@@ -50,6 +51,8 @@ function ReverseArrayFoto(sugestFood, indexRecom, setIndexRecom) {
           index={index}
           source={item.strMealThumb}
           show={indexRecom}
+          location={location}
+          id={item.idMeal}
         />
       ))
   );
@@ -91,7 +94,7 @@ export default function Detalhes(props) {
   const [copy, copiador] = useState(false);
   const {
     details, favoriteRecipes, status, indexRecom, setIndexRecom,
-    sugestFood, idDaReceita,
+    sugestFood, idDaReceita, location,
   } = props;
   useEffect(() => {
     setFavority(favoriteRecipes);
@@ -117,7 +120,7 @@ export default function Detalhes(props) {
         <h3 className="subTitle">Recomendações</h3>
         <div style={{ display: 'flex', flex: 1, flexGrow: 1, flexDirection: 'row' }}>
           <button onClick={() => setIndexRecom(indexRecom - 1)}>{'<'}</button>
-          {ReverseArrayFoto(sugestFood, indexRecom, setIndexRecom)}
+          {ReverseArrayFoto(sugestFood, indexRecom, setIndexRecom,location)}
           <button onClick={() => setIndexRecom(indexRecom + 1)}>{'>'}</button>
         </div>
       </div>

@@ -36,6 +36,7 @@ export default function TelaDetalhesBebida(props) {
       sugestFood={sugestFood}
       idDaReceita={idDaReceita}
       match={props.match}
+      location={props.location}
     />
   );
 }
