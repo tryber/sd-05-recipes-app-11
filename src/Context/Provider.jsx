@@ -29,7 +29,7 @@ function filterComidas(title, optionsValue, searchValue, setReceitas, setIsFetch
       .then(() => {
         setIsFetching(true);
       });
-  } else {
+  } else if (optionsValue === 'nome') {
     ApiSearchMealByName(searchValue)
       .then((ListaComidasPeloNome) => {
         setReceitas(ListaComidasPeloNome);
@@ -57,7 +57,7 @@ function filterBebidas(title, optionsValue, searchValue, setReceitas, setIsFetch
       .then(() => {
         setIsFetching(true);
       });
-  } else {
+  } else if (optionsValue === 'nome') {
     searchCockTailByName(searchValue)
       .then((ListaBebidasPeloNome) => {
         setReceitas(ListaBebidasPeloNome);

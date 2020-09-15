@@ -9,6 +9,7 @@ import Card from '../Components/CardRecomend.jsx'; */
 import context from '../Context/ReceitasContext';
 import DetalhesBebida from '../Components/DetalhesBebida';
 import { done, favoriteRecipes } from './TelaDetalhesComida';
+import '../CSS/TelaDetalhes.css';
 
 /* function loopIndex(indexArr, IndexAtual) {
   let index = indexArr;

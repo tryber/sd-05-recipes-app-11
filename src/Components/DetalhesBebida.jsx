@@ -48,47 +48,60 @@ function ReverseArrayFoto(sugestFood, indexRecom, setIndexRecom) {
 
 export default function Detalhes(props) {
   const {
-    details, favoriteRecipes, status, indexRecom,
-    setIndexRecom, sugestFood, idDaReceita,
+    details,
+    favoriteRecipes,
+    status,
+    indexRecom,
+    setIndexRecom,
+    sugestFood,
+    idDaReceita,
   } = props;
 
   const ingredientes = funcIngredients([], details);
   return (
     <div>
-      <img src={details.strDrinkThumb} alt={details.strDrink} data-testid="recipe-photo" />
-      <div>
-        <h1 data-testid="recipe-title">{details.strDrink}</h1>
-        <img
-          src={favoriteRecipes ? blackHeart : whiteHeart}
-          alt="like icon"
-          data-testid="favorite-btn"
-        />
-        <img src={shareIcon} alt="like icon" data-testid={'share-btn'} />
+      <img
+        src={details.strDrinkThumb}
+        alt={details.strDrink}
+        className="recipe-photo"
+        data-testid="recipe-photo"
+      />
+      <div className="DetelhesBuddy">
+        <div className="campoTitle">
+          <h1 className="recipe-title" data-testid="recipe-title">{details.strDrink}</h1>
+          <img
+            src={favoriteRecipes ? blackHeart : whiteHeart}
+            alt="like icon"
+            className="icon"
+            data-testid="favorite-btn"
+          />
+          <img className="icon" src={shareIcon} alt="like icon" data-testid={'share-btn'} />
+        </div>
+        <h5 className="recipe-category" data-testid="recipe-category">{details.strCategory}</h5>
+        <h3 className="subTitle">Ingredients</h3>
+        <ul className="yellowCamp">
+          {ingredientes.map((item, index) => (
+            <li key={item.ingrediente} data-testid={`${index}-ingredient-name-and-measure`}>
+              {item.ingrediente}- {item.quantidade}
+            </li>
+          ))}
+        </ul>
+        <h3 className="subTitle">Instructions:</h3>
+        <p className="yellowCamp" data-testid="instructions">{details.strInstructions}</p>
+        <h3 className="subTitle">Recomendações</h3>
+        <div style={{ display: 'flex', flex: 1, flexGrow: 1, flexDirection: 'row' }}>
+          <button onClick={() => setIndexRecom(indexRecom - 1)}>{'<'}</button>
+          {ReverseArrayFoto(sugestFood, indexRecom, setIndexRecom)}
+          <button onClick={() => setIndexRecom(indexRecom + 1)}>{'>'}</button>
+        </div>
+        {status === 'done' ? null : (
+          <Link to={`/comidas/${idDaReceita}/in-progress`}>
+            <button className="start-recipe-btn" data-testid="start-recipe-btn">
+              {status === 'noting' ? 'Inicia Receita' : 'Continuar Receita'}
+            </button>
+          </Link>
+        )}
       </div>
-      <h5 data-testid="recipe-category">{details.strCategory}</h5>
-      <h3>Ingredients</h3>
-      <ul>
-        {ingredientes.map((item, index) => (
-          <li key={item.ingrediente} data-testid={`${index}-ingredient-name-and-measure`}>
-            {item.ingrediente}- {item.quantidade}
-          </li>
-        ))}
-      </ul>
-      <h3>Instructions:</h3>
-      <p data-testid="instructions">{details.strInstructions}</p>
-      <h3>Recomendações</h3>
-      <div style={{ display: 'flex', flex: 1, flexGrow: 1, flexDirection: 'row' }}>
-        <button onClick={() => setIndexRecom(indexRecom - 1)}>{'<'}</button>
-        {ReverseArrayFoto(sugestFood, indexRecom, setIndexRecom)}
-        <button onClick={() => setIndexRecom(indexRecom + 1)}>{'>'}</button>
-      </div>
-      {status === 'done' ? null : (
-        <Link to={`/comidas/${idDaReceita}/in-progress`}>
-          <button data-testid="start-recipe-btn">
-            {status === 'noting' ? 'Inicia Receita' : 'Continuar Receita'}
-          </button>
-        </Link>
-      )}
     </div>
   );
 }

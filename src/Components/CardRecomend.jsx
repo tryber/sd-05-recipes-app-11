@@ -4,14 +4,16 @@ import propTypes from 'prop-types';
 export default function Card(props) {
   const { title, index, source } = props;
   return (
-    <div>
+    <div className="recomendation-card">
       <img
         src={source}
         alt=""
         data-testid={`${index}-recomendation-card`}
         style={{ width: '100%' }}
       />
-      <p data-testid={`${index}-recomendation-title`}>{title}</p>
+      <p className="recomendation-title" data-testid={`${index}-recomendation-title`}>
+        {title}
+      </p>
     </div>
   );
 }

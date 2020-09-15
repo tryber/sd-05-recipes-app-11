@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { searchMealById } from '../Services/ApiComida';
 import context from '../Context/ReceitasContext';
 import DetalhesComida from '../Components/DetalhesComida';
+import '../CSS/TelaDetalhes.css';
 
 export function done(setStatus, id) {
   let doneVar = localStorage.getItem('doneRecipes');
