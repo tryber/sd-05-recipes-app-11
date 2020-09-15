@@ -10,9 +10,11 @@ export default function ListReceitas() {
   }
   return (
     <div className="listReceitas">
-      {receitas.map((receita) => (
-        <Receita receita={receita} />
-      ))}
+      {receitas
+        .filter((_, index) => index < 12)
+        .map((receita, index) => (
+          <Receita receita={receita} index={index} />
+        ))}
     </div>
   );
 }

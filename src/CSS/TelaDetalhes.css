@@ -3,7 +3,7 @@
 }
 
 .DetelhesBuddy {
-  margin: 10px 20px 20px;
+  margin: 10px 20px 60px;
 }
 
 .campoTitle {
@@ -22,7 +22,7 @@
   padding: 5px 20px;
 }
 
-.recipe-category{
+.recipe-category {
   color: rgba(255, 255, 255, 0.5);
   margin: 0 0 0 30px;
 }
@@ -35,7 +35,7 @@
   background-color: #e07d0d;
   border-radius: 10px;
   color: black;
-  margin: 0px;
+  margin: 0;
   padding: 20px;
 }
 
@@ -46,8 +46,10 @@
 .start-recipe-btn {
   background-color: #e07d0d;
   border-radius: 10px;
+  bottom: 0;
   font-size: 20px;
   height: 50px;
-  margin-top: 30px;
-  width: 100%;
+  margin: 1%;
+  position: fixed;
+  width: 98%;
 }

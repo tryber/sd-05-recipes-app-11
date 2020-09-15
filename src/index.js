@@ -7,9 +7,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Provider from './Context/Provider';
 
-
-
-const container = document.getElementById("root");
+const container = document.getElementById('root');
 
 ReactDOM.render(
   <Provider>
