@@ -9,10 +9,10 @@ import '../../CSS/HeaderBusca.css';
 export default function HeaderBusca(props) {
   const { showSearch, setShowSearch, title, showTop } = props;
   const { setTitle } = useContext(ReceitasContext);
-
   useEffect(() => {
     setTitle(title);
   }, [title]);
+  const newTitle = title === 'comidas' ? 'Comidas' : 'Bebidas';
 
   return (
     <div className="Bar-Busca-Header">
@@ -20,7 +20,7 @@ export default function HeaderBusca(props) {
         <img src={userLogo} alt="Imagem User" data-testid="profile-top-btn" />
       </Link>
       <div data-testid="page-title" className="Bar-Busca-Header-text">
-        <span>{title}</span>
+        <span>{newTitle}</span>
       </div>
       {!showTop ? (
         <Link onClick={() => setShowSearch(!showSearch)} className="Top-Btn">
