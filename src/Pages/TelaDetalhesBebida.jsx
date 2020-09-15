@@ -43,4 +43,5 @@ export default function TelaDetalhesBebida(props) {
 
 TelaDetalhesBebida.propTypes = {
   match: propTypes.shape({ params: propTypes.number.isRequired }).isRequired,
+  location: propTypes.string.isRequired,
 };

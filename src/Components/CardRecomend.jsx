@@ -32,4 +32,6 @@ Card.propTypes = {
   index: propTypes.number.isRequired,
   source: propTypes.string.isRequired,
   show: propTypes.number.isRequired,
+  location: propTypes.string.isRequired,
+  id: propTypes.number.isRequired,
 };

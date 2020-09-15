@@ -120,7 +120,7 @@ export default function Detalhes(props) {
         <h3 className="subTitle">Recomendações</h3>
         <div style={{ display: 'flex', flex: 1, flexGrow: 1, flexDirection: 'row' }}>
           <button onClick={() => setIndexRecom(indexRecom - 1)}>{'<'}</button>
-          {ReverseArrayFoto(sugestFood, indexRecom, setIndexRecom,location)}
+          {ReverseArrayFoto(sugestFood, indexRecom, setIndexRecom, location)}
           <button onClick={() => setIndexRecom(indexRecom + 1)}>{'>'}</button>
         </div>
       </div>
@@ -143,4 +143,5 @@ Detalhes.propTypes = {
   setIndexRecom: propTypes.func.isRequired,
   sugestFood: propTypes.arrayOf(propTypes.instanceOf(Object)).isRequired,
   idDaReceita: propTypes.number.isRequired,
+  location: propTypes.string.isRequired,
 };

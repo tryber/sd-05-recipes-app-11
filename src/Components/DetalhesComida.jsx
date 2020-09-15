@@ -83,7 +83,7 @@ export function loopIndex(indexArr, IndexAtual) {
   return index % 6 === IndexAtual % 6;
 }
 
-function ReverseArrayFoto(sugestDrink, indexRecom, setIndexRecom,location) {
+function ReverseArrayFoto(sugestDrink, indexRecom, setIndexRecom, location) {
   if (indexRecom < 0) {
     setIndexRecom(5);
     return (
@@ -222,4 +222,5 @@ Detalhes.propTypes = {
   setIndexRecom: propTypes.func.isRequired,
   sugestDrink: propTypes.arrayOf(propTypes.instanceOf(Object)).isRequired,
   idDaReceita: propTypes.number.isRequired,
+  location: propTypes.string.isRequired,
 };
