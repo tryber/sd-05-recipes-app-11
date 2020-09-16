@@ -1,7 +1,7 @@
 .buddy-perfil {
   display: flex;
-  margin: 200px 10px;
   flex-direction: column;
+  margin: 200px 10px;
 }
 
 .profile-email {
