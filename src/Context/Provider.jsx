@@ -127,6 +127,7 @@ export default function Provider(props) {
   const [title, setTitle] = useState('');
   const [sugestDrink, setSugestDrink] = useState([]);
   const [sugestFood, setSugestFood] = useState([]);
+  const [email, setEmail] = useState('');
 
   const state = {
     isFetching,
@@ -145,6 +146,8 @@ export default function Provider(props) {
     setSugestDrink,
     sugestFood,
     setSugestFood,
+    email,
+    setEmail,
   };
   useEffect(() => {
     setupRecomendation(searchValue, setReceitas, setIsFetching, setSugestFood, setSugestDrink);
