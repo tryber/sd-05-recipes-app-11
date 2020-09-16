@@ -136,19 +136,20 @@ export default function Provider(props) {
     searchValue,
     changeFilter,
     title,
+    sugestDrink,
+    sugestFood,
+    email,
     setIsFetching,
     setReceitas,
     setOptionsValue,
     setSearchValue,
     setchangeFilter,
     setTitle,
-    sugestDrink,
     setSugestDrink,
-    sugestFood,
     setSugestFood,
-    email,
     setEmail,
   };
+  console.log(email);
   useEffect(() => {
     setupRecomendation(searchValue, setReceitas, setIsFetching, setSugestFood, setSugestDrink);
   }, []);

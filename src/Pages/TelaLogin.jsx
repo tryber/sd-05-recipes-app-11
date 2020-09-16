@@ -13,9 +13,10 @@ function validateEmail(email) {
 function onclickFunction(emailLocal, setEmail) {
   if (!localStorage.getItem('mealsToken')) localStorage.setItem('mealsToken', '1');
   if (!localStorage.getItem('cocktailsToken')) localStorage.setItem('cocktailsToken', '1');
-  if (!localStorage.getItem('user'))
+  if (!localStorage.getItem('user')) {
     localStorage.setItem('user', JSON.stringify({ email: emailLocal }));
-  setEmail(emailLocal);
+    setEmail(emailLocal);
+  }
 }
 /*   localStorage.setItem('doneRecipes', [{
       id: id-da-receita,
