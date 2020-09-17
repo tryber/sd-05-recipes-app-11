@@ -1,18 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import MenuInferior from '../Components/MenuInferior';
 import BarraHeader from '../Components/Barra de Busca - Header/Header';
-import Context from '../Context/ReceitasContext';
 import '../CSS/TelaPerfil.css';
 
 export default function TelaPerfil() {
-  const { email } = useContext(Context);
-  console.log(email);
+  const email = JSON.parse(localStorage.getItem('user'));
   return (
     <div>
       <BarraHeader title={'Perfil'} showTop="true" />
       <div className="buddy-perfil">
-        <p className="profile-email" data-testid="profile-email">{email}</p>
+        <p className="profile-email" data-testid="profile-email">
+          {email.email}
+        </p>
         <Link to="/receitas-feitas" data-testid="profile-done-btn" id="receitasFeitas">
           <button className="profile-btn">Receitas Feitas</button>
         </Link>
