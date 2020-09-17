@@ -7,6 +7,7 @@ import '../CSS/TelaPerfil.css';
 
 export default function TelaPerfil() {
   const { email } = useContext(Context);
+  console.log(email);
   return (
     <div>
       <BarraHeader title={'Perfil'} showTop="true" />
