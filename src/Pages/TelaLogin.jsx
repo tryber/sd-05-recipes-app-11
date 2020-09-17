@@ -16,7 +16,6 @@ function onclickFunction( email /* emailLocal, setEmail */) {
   if (!localStorage.getItem('user')) {
     localStorage.setItem('user', JSON.stringify({ email: email }));
   }
-  /* setEmail(emailLocal); */
 }
 /*   localStorage.setItem('doneRecipes', [{
       id: id-da-receita,
