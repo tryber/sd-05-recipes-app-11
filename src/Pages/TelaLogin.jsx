@@ -10,12 +10,11 @@ function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
-function onclickFunction(emailLocal, setEmail) {
+function onclickFunction(email) {
   if (!localStorage.getItem('mealsToken')) localStorage.setItem('mealsToken', '1');
   if (!localStorage.getItem('cocktailsToken')) localStorage.setItem('cocktailsToken', '1');
   if (!localStorage.getItem('user')) {
-    localStorage.setItem('user', JSON.stringify({ email: emailLocal }));
-    setEmail(emailLocal);
+    localStorage.setItem('user', JSON.stringify({ email }));
   }
 }
 /*   localStorage.setItem('doneRecipes', [{
@@ -50,9 +49,8 @@ function onclickFunction(emailLocal, setEmail) {
   }); */
 
 export default function Login() {
-  const { setEmail: setEmailContext } = useContext(Context);
+  const { setEmail, email } = useContext(Context);
   const [validation, setValidation] = useState(true);
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   useEffect(() => {
     if (validateEmail(email) && password.length > 6) {
@@ -88,7 +86,7 @@ export default function Login() {
           data-testid="login-submit-btn"
           className="loginButton"
           type="button"
-          onClick={() => onclickFunction(email, setEmailContext)}
+          onClick={() => onclickFunction(email)}
           disabled={validation}
         >
           Entrar
