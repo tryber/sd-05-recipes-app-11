@@ -10,11 +10,11 @@ function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
-function onclickFunction( email /* emailLocal, setEmail */) {
+function onclickFunction(email) {
   if (!localStorage.getItem('mealsToken')) localStorage.setItem('mealsToken', '1');
   if (!localStorage.getItem('cocktailsToken')) localStorage.setItem('cocktailsToken', '1');
   if (!localStorage.getItem('user')) {
-    localStorage.setItem('user', JSON.stringify({ email: email }));
+    localStorage.setItem('user', JSON.stringify({ email }));
   }
 }
 /*   localStorage.setItem('doneRecipes', [{
@@ -51,7 +51,6 @@ function onclickFunction( email /* emailLocal, setEmail */) {
 export default function Login() {
   const { setEmail, email } = useContext(Context);
   const [validation, setValidation] = useState(true);
-  console.log(email)
   const [password, setPassword] = useState('');
   useEffect(() => {
     if (validateEmail(email) && password.length > 6) {
