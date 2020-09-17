@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import propTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import Tags from './tagDone';
 
@@ -14,11 +15,16 @@ export default function CardDone(props) {
   const { id, type, area, category, alcoholicOrNot, name, image, doneDate, tags } = props.item;
   const { index } = props;
   const [copy, setCopy] = useState(false);
-  const isMeal = type === 'comida' ? true : false;
+  const isMeal = type === 'comida';
   return (
     <div>
       <Link to={`/${type}s/${id}`}>
-        <img className="horizontal-image" src={image} alt={name} data-testid={`${index}-horizontal-image`} />
+        <img
+          className="horizontal-image"
+          src={image}
+          alt={name}
+          data-testid={`${index}-horizontal-image`}
+        />
       </Link>
       <div>
         <div>
@@ -47,3 +53,8 @@ export default function CardDone(props) {
     </div>
   );
 }
+
+CardDone.propTypes = {
+  index: propTypes.number.isRequired,
+  item: propTypes.instanceOf(Object).isRequired,
+};
