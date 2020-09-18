@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import shareIcon from '../../images/shareIcon.svg';
-import propType from 'prop-types';
+import propTypes from 'prop-types';
 
 // HA https://www.codegrepper.com/code-examples/basic/copy+string+to+clipboard+javascript
 export function CopyURL(address) {
@@ -29,10 +29,10 @@ export default function ShareOption(props) {
   );
 }
 
-ShareOption.propType = {
-  id: propType.number.isRequired,
-  type: propType.string.isRequired,
-  index: propType.number.isRequired,
-  copy: propType.string.isRequired,
-  setCopy: propType.func.isRequired,
+ShareOption.propTypes = {
+  id: propTypes.number.isRequired,
+  type: propTypes.string.isRequired,
+  index: propTypes.number.isRequired,
+  copy: propTypes.string.isRequired,
+  setCopy: propTypes.func.isRequired,
 };
