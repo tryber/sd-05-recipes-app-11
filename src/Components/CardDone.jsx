@@ -3,13 +3,14 @@ import propTypes from 'prop-types';
 import Tags from './tagDone';
 import HorizontalName from './cards/HorizontalName';
 import ShareOption from './cards/ShareButton';
+import ImageTop from './cards/ImageTop';
 
 // HA https://www.codegrepper.com/code-examples/basic/copy+string+to+clipboard+javascript
 export function CopyURL(address) {
   window.navigator.clipboard.writeText(address);
 }
 export default function CardDone(props) {
-  const { id, type, area, category, alcoholicOrNot, doneDate, tags } = props.item;
+  const { type, area, category, alcoholicOrNot, doneDate, tags } = props.item;
   const { index, item } = props;
   const [copy, setCopy] = useState(false);
   const isMeal = type === 'comida';
