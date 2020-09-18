@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
-import Tags from './tagDone';
+import blackHeart from '../images/blackHeartIcon.svg';
 import HorizontalName from './cards/HorizontalName';
 import ShareOption from './cards/ShareButton';
 import ImageTop from './cards/ImageTop';
@@ -9,8 +10,15 @@ import ImageTop from './cards/ImageTop';
 export function CopyURL(address) {
   window.navigator.clipboard.writeText(address);
 }
-export default function CardDone(props) {
-  const { type, area, category, alcoholicOrNot, doneDate, tags } = props.item;
+
+export function desFavorite(id) {
+  let favorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  favorite = favorite.filter((el) => el.id !== id);
+  localStorage.setItem('favoriteRecipes', JSON.stringify(favorite));
+}
+
+export default function CardFavorite(props) {
+  const { id, type, area, category, alcoholicOrNot } = props.item;
   const { index, item } = props;
   const [copy, setCopy] = useState(false);
   const isMeal = type === 'comida';
@@ -25,17 +33,24 @@ export default function CardDone(props) {
             <p data-testid={`${index}-horizontal-top-text`}>{alcoholicOrNot}</p>
           )}
           <ShareOption index={index} copy={copy} item={item} setCopy={setCopy} />
+          <br />
+          <br />
+          <Link onClick={() => desFavorite(id)}>
+            <img
+              src={blackHeart}
+              alt="like icon"
+              className="icon"
+              data-testid={`${index}-horizontal-favorite-btn`}
+            />
+          </Link>
           <HorizontalName item={item} index={index} />
         </div>
-        <span>Feita em: </span>{' '}
-        <span data-testid={`${index}-horizontal-done-date`}>{doneDate}</span>
-        {isMeal ? tags.map((tagName) => <Tags tagName={tagName} index={index} />) : null}
       </div>
     </div>
   );
 }
 
-CardDone.propTypes = {
+CardFavorite.propTypes = {
   index: propTypes.number.isRequired,
   item: propTypes.instanceOf(Object).isRequired,
 };
