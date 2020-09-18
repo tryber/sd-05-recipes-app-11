@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import Tags from './tagDone';
 import HorizontalName from './cards/HorizontalName';
@@ -10,20 +9,13 @@ export function CopyURL(address) {
   window.navigator.clipboard.writeText(address);
 }
 export default function CardDone(props) {
-  const { id, type, area, category, alcoholicOrNot, name, image, doneDate, tags } = props.item;
+  const { id, type, area, category, alcoholicOrNot, doneDate, tags } = props.item;
   const { index, item } = props;
   const [copy, setCopy] = useState(false);
   const isMeal = type === 'comida';
   return (
     <div>
-      <Link to={`/${type}s/${id}`}>
-        <img
-          className="horizontal-image"
-          src={image}
-          alt={name}
-          data-testid={`${index}-horizontal-image`}
-        />
-      </Link>
+      <ImageTop item={item} index={index} />
       <div>
         <div>
           {isMeal ? (

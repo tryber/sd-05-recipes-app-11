@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import blackHeart from '../images/blackHeartIcon.svg';
 import HorizontalName from './cards/HorizontalName';
 import ShareOption from './cards/ShareButton';
+import ImageTop from './cards/ImageTop';
 
 // HA https://www.codegrepper.com/code-examples/basic/copy+string+to+clipboard+javascript
 export function CopyURL(address) {
@@ -17,20 +18,13 @@ export function desFavorite(id) {
 }
 
 export default function CardFavorite(props) {
-  const { id, type, area, category, alcoholicOrNot, name, image } = props.item;
+  const { id, type, area, category, alcoholicOrNot } = props.item;
   const { index, item } = props;
   const [copy, setCopy] = useState(false);
   const isMeal = type === 'comida';
   return (
     <div>
-      <Link to={`/${type}s/${id}`}>
-        <img
-          className="horizontal-image"
-          src={image}
-          alt={name}
-          data-testid={`${index}-horizontal-image`}
-        />
-      </Link>
+      <ImageTop item={item} index={index} />
       <div>
         <div>
           {isMeal ? (
