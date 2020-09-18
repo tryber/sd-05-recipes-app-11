@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 
 export default function HorizontalName(props) {
-  const { id, type, name } = props.item;
-  const { index } = props;
+  const { index, item } = props;
+  const { type, name } = item;
   return (
-    <Link to={`/${type}s/${id}`}>
+    <Link to={`/${type}s/${item.id}`}>
       <p data-testid={`${index}-horizontal-name`}>{name}</p>
     </Link>
   );
 }
 HorizontalName.propTypes = {
-  id: propTypes.instanceOf(Object).isRequired,
   index: propTypes.number.isRequired,
+  item: propTypes.instanceOf(Object).isRequired,
 };

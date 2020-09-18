@@ -30,8 +30,6 @@ export default function ShareOption(props) {
 
 ShareOption.propTypes = {
   item: propTypes.instanceOf(Object).isRequired,
-  /* id: propTypes.number.isRequired,
-  type: propTypes.string.isRequired, */
   index: propTypes.number.isRequired,
   copy: propTypes.string.isRequired,
   setCopy: propTypes.func.isRequired,
