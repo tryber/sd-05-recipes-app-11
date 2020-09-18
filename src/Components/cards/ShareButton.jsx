@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import shareIcon from '../../images/shareIcon.svg';
 import propTypes from 'prop-types';
+import shareIcon from '../../images/shareIcon.svg';
 
 // HA https://www.codegrepper.com/code-examples/basic/copy+string+to+clipboard+javascript
 export function CopyURL(address) {
