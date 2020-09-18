@@ -46,15 +46,6 @@ export default function CardFavorite(props) {
             <p data-testid={`${index}-horizontal-top-text`}>{alcoholicOrNot}</p>
           )}
           <ShareOption index={index} copy={copy} item={item} setCopy={setCopy} />
-         {/*  <Link
-            onClick={() => {
-              setCopy(true);
-              CopyURL(`${localizaAddress()}/${type}s/${id}`);
-            }}
-          >
-            <img src={shareIcon} alt="Share Icon" data-testid={`${index}-horizontal-share-btn`} />
-            {copy ? <span>Link copiado!</span> : null}
-          </Link> */}
           <br/>
           <br/>
           <Link onClick={() => desFavorite(id)}>
