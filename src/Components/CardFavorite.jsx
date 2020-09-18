@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
-import shareIcon from '../images/shareIcon.svg';
 import blackHeart from '../images/blackHeartIcon.svg';
-import whiteHeart from '../images/whiteHeartIcon.svg';
 import HorizontalName from './cards/HorizontalName';
 import ShareOption from './cards/ShareButton';
 
@@ -12,19 +10,14 @@ export function CopyURL(address) {
   window.navigator.clipboard.writeText(address);
 }
 
-function localizaAddress() {
-  return window.location.origin;
-}
-
 export function desFavorite(id) {
-  let type = 'Drink';
   let favorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
   favorite = favorite.filter((el) => el.id !== id);
   localStorage.setItem('favoriteRecipes', JSON.stringify(favorite));
 }
 
 export default function CardFavorite(props) {
-  const { id, type, area, category, alcoholicOrNot, name, image, doneDate, tags } = props.item;
+  const { id, type, area, category, alcoholicOrNot, name, image } = props.item;
   const { index, item } = props;
   const [copy, setCopy] = useState(false);
   const isMeal = type === 'comida';
@@ -46,8 +39,8 @@ export default function CardFavorite(props) {
             <p data-testid={`${index}-horizontal-top-text`}>{alcoholicOrNot}</p>
           )}
           <ShareOption index={index} copy={copy} item={item} setCopy={setCopy} />
-          <br/>
-          <br/>
+          <br />
+          <br />
           <Link onClick={() => desFavorite(id)}>
             <img
               src={blackHeart}
