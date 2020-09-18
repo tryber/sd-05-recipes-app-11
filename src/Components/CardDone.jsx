@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import Tags from './tagDone';
 import HorizontalName from './cards/HorizontalName';
+import ShareOption from './cards/ShareButton';
 
 // HA https://www.codegrepper.com/code-examples/basic/copy+string+to+clipboard+javascript
 export function CopyURL(address) {
@@ -36,7 +37,7 @@ export default function CardDone(props) {
           )}
           
           <ShareOption index={index} copy={copy} item={item} setCopy={setCopy} />
-          
+
           <HorizontalName item={item} index={index} />
           {/* <Link to={`/${type}s/${id}`}>
             <p data-testid={`${index}-horizontal-name`}>{name}</p>
