@@ -13,14 +13,13 @@ function localizaAddress() {
 }
 
 export default function ShareOption(props) {
-  const { id, type } = props.item;
   const { index, copy, setCopy } = props;
 
   return (
     <Link
       onClick={() => {
         setCopy(true);
-        CopyURL(`${localizaAddress()}/${type}s/${id}`);
+        CopyURL(`${localizaAddress()}/${props.item.type}s/${props.item.id}`);
       }}
     >
       <img src={shareIcon} alt="Share Icon" data-testid={`${index}-horizontal-share-btn`} />
@@ -30,8 +29,9 @@ export default function ShareOption(props) {
 }
 
 ShareOption.propTypes = {
-  id: propTypes.number.isRequired,
-  type: propTypes.string.isRequired,
+  item: propTypes.instanceOf(Object).isRequired,
+  /* id: propTypes.number.isRequired,
+  type: propTypes.string.isRequired, */
   index: propTypes.number.isRequired,
   copy: propTypes.string.isRequired,
   setCopy: propTypes.func.isRequired,
