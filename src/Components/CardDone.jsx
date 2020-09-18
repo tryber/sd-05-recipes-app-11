@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import Tags from './tagDone';
+import HorizontalName from './cards/HorizontalName';
 
 // HA https://www.codegrepper.com/code-examples/basic/copy+string+to+clipboard+javascript
 export function CopyURL(address) {
@@ -13,7 +14,7 @@ function localizaAddress() {
 }
 export default function CardDone(props) {
   const { id, type, area, category, alcoholicOrNot, name, image, doneDate, tags } = props.item;
-  const { index } = props;
+  const { index, item } = props;
   const [copy, setCopy] = useState(false);
   const isMeal = type === 'comida';
   return (
@@ -33,18 +34,13 @@ export default function CardDone(props) {
           ) : (
             <p data-testid={`${index}-horizontal-top-text`}>{alcoholicOrNot}</p>
           )}
-          <Link
-            onClick={() => {
-              setCopy(true);
-              CopyURL(`${localizaAddress()}/${type}s/${id}`);
-            }}
-          >
-            <img src={shareIcon} alt="Share Icon" data-testid={`${index}-horizontal-share-btn`} />
-            {copy ? <span>Link copiado!</span> : null}
-          </Link>
-          <Link to={`/${type}s/${id}`}>
+          
+          <ShareOption index={index} copy={copy} item={item} setCopy={setCopy} />
+          
+          <HorizontalName item={item} index={index} />
+          {/* <Link to={`/${type}s/${id}`}>
             <p data-testid={`${index}-horizontal-name`}>{name}</p>
-          </Link>
+          </Link> */}
         </div>
         <span>Feita em: </span>{' '}
         <span data-testid={`${index}-horizontal-done-date`}>{doneDate}</span>

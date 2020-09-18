@@ -4,6 +4,8 @@ import propTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
+import HorizontalName from './cards/HorizontalName';
+import ShareOption from './cards/ShareButton';
 
 // HA https://www.codegrepper.com/code-examples/basic/copy+string+to+clipboard+javascript
 export function CopyURL(address) {
@@ -23,10 +25,9 @@ export function desFavorite(id) {
 
 export default function CardFavorite(props) {
   const { id, type, area, category, alcoholicOrNot, name, image, doneDate, tags } = props.item;
-  const { index } = props;
+  const { index, item } = props;
   const [copy, setCopy] = useState(false);
   const isMeal = type === 'comida';
-  console.log(props.item);
   return (
     <div>
       <Link to={`/${type}s/${id}`}>
@@ -44,7 +45,8 @@ export default function CardFavorite(props) {
           ) : (
             <p data-testid={`${index}-horizontal-top-text`}>{alcoholicOrNot}</p>
           )}
-          <Link
+          <ShareOption index={index} copy={copy} item={item} setCopy={setCopy} />
+         {/*  <Link
             onClick={() => {
               setCopy(true);
               CopyURL(`${localizaAddress()}/${type}s/${id}`);
@@ -52,7 +54,9 @@ export default function CardFavorite(props) {
           >
             <img src={shareIcon} alt="Share Icon" data-testid={`${index}-horizontal-share-btn`} />
             {copy ? <span>Link copiado!</span> : null}
-          </Link>
+          </Link> */}
+          <br/>
+          <br/>
           <Link onClick={() => desFavorite(id)}>
             <img
               src={blackHeart}
@@ -61,9 +65,7 @@ export default function CardFavorite(props) {
               data-testid={`${index}-horizontal-favorite-btn`}
             />
           </Link>
-          <Link to={`/${type}s/${id}`}>
-            <p data-testid={`${index}-horizontal-name`}>{name}</p>
-          </Link>
+          <HorizontalName item={item} index={index} />
         </div>
       </div>
     </div>
