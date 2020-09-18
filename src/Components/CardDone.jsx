@@ -17,38 +17,45 @@ export default function CardDone(props) {
   const [copy, setCopy] = useState(false);
   const isMeal = type === 'comida';
   return (
-    <div>
+    <div className="CardItem">
       <Link to={`/${type}s/${id}`}>
         <img
-          className="horizontal-image"
           src={image}
           alt={name}
           data-testid={`${index}-horizontal-image`}
+          className="CardImage"
         />
       </Link>
-      <div>
-        <div>
-          {isMeal ? (
-            <p data-testid={`${index}-horizontal-top-text`}>{`${area} - ${category}`}</p>
-          ) : (
-            <p data-testid={`${index}-horizontal-top-text`}>{alcoholicOrNot}</p>
-          )}
-          <Link
-            onClick={() => {
-              setCopy(true);
-              CopyURL(`${localizaAddress()}/${type}s/${id}`);
-            }}
-          >
-            <img src={shareIcon} alt="Share Icon" data-testid={`${index}-horizontal-share-btn`} />
-            {copy ? <span>Link copiado!</span> : null}
-          </Link>
-          <Link to={`/${type}s/${id}`}>
-            <p data-testid={`${index}-horizontal-name`}>{name}</p>
-          </Link>
-        </div>
+      <div className="recipe-category">
+        {isMeal ? (
+          <p data-testid={`${index}-horizontal-top-text`}>{`${area} - ${category}`}</p>
+        ) : (
+          <p data-testid={`${index}-horizontal-top-text`}>{alcoholicOrNot}</p>
+        )}
+        <Link
+          onClick={() => {
+            setCopy(true);
+            CopyURL(`${localizaAddress()}/${type}s/${id}`);
+          }}
+        >
+          <img
+            src={shareIcon}
+            alt="Share Icon"
+            data-testid={`${index}-horizontal-share-btn`}
+            className="icon"
+          />
+          {copy ? <span className="link">Link copiado!</span> : null}
+        </Link>
+        <Link to={`/${type}s/${id}`}>
+          <p data-testid={`${index}-horizontal-name`} className="campoTitle">
+            {name}
+          </p>
+        </Link>
         <span>Feita em: </span>{' '}
         <span data-testid={`${index}-horizontal-done-date`}>{doneDate}</span>
-        {isMeal ? tags.map((tagName) => <Tags tagName={tagName} index={index} />) : null}
+        <div className="tags">
+          {isMeal ? tags.map((tagName) => <Tags tagName={tagName} index={index} />) : null}
+        </div>
       </div>
     </div>
   );

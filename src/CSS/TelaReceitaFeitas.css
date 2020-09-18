@@ -1,3 +1,28 @@
+
+.CardDone {
+}
+
+.CardItem {
+  display: flex;
+}
+
+.CardImage {
+  width: 100%;
+}
+
+.tags {
+  display: flex;
+}
+
+.tag {
+  background-color: #e07d0d;
+  border: 1px;
+  border-radius: 10px;
+  color: black;
+  margin: 5px;
+  padding: 5px 10px;
+}
+
 .horizontal-image {
   width: 100%;
 }
@@ -7,9 +32,13 @@
 }
 
 .campoTitle {
+
+  color: white;
+  text-decoration: none;
   display: flex;
   justify-content: space-between;
   margin: 0;
+  word-wrap: none;
 }
 
 .recipe-title {
@@ -39,8 +68,9 @@
   padding: 20px;
 }
 
-.recomendation-card {
+.link {
   color: white;
+  font-size: 0.8em;
   text-decoration: none;
 }
 

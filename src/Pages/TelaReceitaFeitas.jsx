@@ -27,7 +27,9 @@ export default function TelaReceitaFeitas() {
       {loadFav
         .filter((el) => (typeSelect ? el.type === typeSelect : true))
         .map((el, index) => (
-          <CardDone item={el} index={index} />
+          <div className="CardDone">
+            <CardDone item={el} index={index} />
+          </div>
         ))}
     </div>
   );

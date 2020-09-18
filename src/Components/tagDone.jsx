@@ -4,9 +4,9 @@ import propTypes from 'prop-types';
 export default function Tags(props) {
   const { index, tagName } = props;
   return (
-    <div>
-      <p data-testid={`${index}-${tagName}-horizontal-tag`}>{tagName}</p>
-    </div>
+    <p data-testid={`${index}-${tagName}-horizontal-tag`} className="tag">
+      {tagName}
+    </p>
   );
 }
 
