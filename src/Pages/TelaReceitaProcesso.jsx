@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import propTypes from 'prop-types';
 import { searchMealById } from '../Services/ApiComida';
+import { searchCockTailById } from '../Services/ApiBebida';
 import context from '../Context/ReceitasContext';
 import Processo from '../Components/Processo';
 import '../CSS/TelaDetalhes.css';
@@ -53,16 +54,25 @@ export default function TelaProcesso(props) {
   const [favorite, setFavorite] = useState(false);
   const { id_da_receita: idDaReceita } = props.match.params;
   useEffect(() => {
-    searchMealById(idDaReceita).then((resposta) => {
+    if(props.location.pathname.includes('comida')) {
+      searchMealById(idDaReceita).then((resposta) => {
+        if (!resposta) {
+          return null;
+        }
+        return setDetails(resposta[0]);
+      });
+    } else {
+      searchCockTailById(idDaReceita).then((resposta) => {
       if (!resposta) {
         return null;
       }
       return setDetails(resposta[0]);
-    });
+      });
+    }
     updateStatus(idDaReceita, setStatus, setFavorite, 'meals');
   }, []);
   if (!details) {
-    return <h1>Carregando</h1>;
+    return <h1>Carregando . . .</h1>;
   }
   return (
     <Processo
