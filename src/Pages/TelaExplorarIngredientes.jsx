@@ -7,8 +7,11 @@ import { searchMealsByListOfIngredient } from '../Services/ApiComida';
 import { useState } from 'react';
 import { searchCockTailByListOfIngredient } from '../Services/ApiBebida';
 import { Link } from 'react-router-dom';
+import Context from '../Context/ReceitasContext';
+import { useContext } from 'react';
 
 export default function TelaExplorarIngredientes(props) {
+  const { funcBusca } = useContext(Context);
   const tipo = /comida/.test(props.match.path) ? 'comidas' : 'bebidas';
   const id = tipo === 'comidas' ? 'idMeal' : 'idDrink';
   const [lista, setLista] = useState([]);
@@ -40,14 +43,29 @@ export default function TelaExplorarIngredientes(props) {
       <br />
       <br />
       <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       {lista
         .filter((_, index) => index < 12)
         .map((el, index) => {
-          console.log(tipo === 'comidas');
           const ingrediente = tipo === 'comidas' ? el.strIngredient : el.strIngredient1;
-          console.log(ingrediente);
           return (
-            <Link to={`/${tipo}`}>
+            <Link
+              to={`/${tipo}`}
+              onClick={(e) => {
+                if (tipo === 'comidas') {
+                  funcBusca(tipo, ingrediente);
+                }else{
+                  funcBusca(tipo, ingrediente);
+                }
+              }}
+            >
               <CardIngredient
                 index={index}
                 title={tipo === 'comidas' ? ingrediente : el.strIngredient1}

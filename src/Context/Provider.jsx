@@ -22,7 +22,7 @@ function noElements(arr) {
     : null;
 }
 
-function filterComidas(title, optionsValue, searchValue, setReceitas, setIsFetching) {
+export function filterComidas(title, optionsValue, searchValue, setReceitas, setIsFetching) {
   if (optionsValue === 'primeiraLetra') {
     if (searchValue.length !== 1) {
       window.alert('Sua busca deve conter somente 1 (um) caracter');
@@ -128,7 +128,14 @@ export default function Provider(props) {
   const [sugestDrink, setSugestDrink] = useState([]);
   const [sugestFood, setSugestFood] = useState([]);
   const [email, setEmail] = useState('');
-
+  
+  const funcBusca = (tipo, ingrediente)=>{
+    if(tipo === 'comidas'){
+      filterComidas(title, 'ingrediente', ingrediente, setReceitas, setIsFetching)
+    }else{
+      filterBebidas(title, 'ingrediente', ingrediente, setReceitas, setIsFetching)
+    }
+  } 
   const state = {
     isFetching,
     receitas,
@@ -148,8 +155,8 @@ export default function Provider(props) {
     setSugestDrink,
     setSugestFood,
     setEmail,
+    funcBusca,
   };
-  console.log(email);
   useEffect(() => {
     setupRecomendation(searchValue, setReceitas, setIsFetching, setSugestFood, setSugestDrink);
   }, []);
