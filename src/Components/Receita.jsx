@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import '../CSS/ListReceitas.css';
 
 export default function Receita(props) {
   const { receita, index } = props;
@@ -11,7 +12,7 @@ export default function Receita(props) {
     id = receita.idDrink;
   }
   return (
-    <Link to={`/${tipo}/${id}`}>
+    <Link className="receitaLink" to={`/${tipo}/${id}`}>
       <div className="receita" data-testid={`${index}-recipe-card`}>
         <img
           className="imgReceita"
