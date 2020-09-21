@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { searchMealrandom } from '../Services/ApiComida';
+import { searchMealRandom } from '../Services/ApiComida';
 import { searchCockTailRandom } from '../Services/ApiBebida';
 import MenuInferior from '../Components/MenuInferior';
 import BarraHeader from '../Components/Barra de Busca - Header/Header';
@@ -11,7 +11,7 @@ export default function TelaExplorarBebidaComida(props) {
   const [exploreSurpriseMeal, setExploreSurpriseMeal] = useState(undefined);
   const [exploreSurpriseCockTail, setExploreSurpriseCockTail] = useState(undefined);
   useEffect(() => {
-    searchMealrandom().then((resposta) => {
+    searchMealRandom().then((resposta) => {
       if (!resposta) return null;
       return setExploreSurpriseMeal(resposta[0].idMeal);
     });
