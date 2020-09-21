@@ -1,56 +1,43 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import MenuInferior from '../Components/MenuInferior';
 import BarraHeader from '../Components/Barra de Busca - Header/Header';
 import CardIngredient from '../Components/cards/CardIngredient';
 import { searchMealsByListOfIngredient } from '../Services/ApiComida';
-import { useState } from 'react';
 import { searchCockTailByListOfIngredient } from '../Services/ApiBebida';
-import { Link } from 'react-router-dom';
 import Context from '../Context/ReceitasContext';
-import { useContext } from 'react';
+
+function startList(tipo, setLista) {
+  if (tipo === 'comidas') {
+    searchMealsByListOfIngredient().then((resposta) => {
+      if (!resposta) {
+        return null;
+      }
+      console.log(resposta);
+      return setLista(resposta);
+    });
+  } else {
+    console.log('bebidas');
+    searchCockTailByListOfIngredient().then((resposta) => {
+      if (!resposta) {
+        return null;
+      }
+      return setLista(resposta);
+    });
+  }
+}
 
 export default function TelaExplorarIngredientes(props) {
   const { funcBusca } = useContext(Context);
   const tipo = /comida/.test(props.match.path) ? 'comidas' : 'bebidas';
-  const id = tipo === 'comidas' ? 'idMeal' : 'idDrink';
   const [lista, setLista] = useState([]);
   useEffect(() => {
-    if (tipo === 'comidas') {
-      searchMealsByListOfIngredient().then((resposta) => {
-        if (!resposta) {
-          return null;
-        }
-        console.log(resposta);
-        return setLista(resposta);
-      });
-    } else {
-      console.log('bebidas');
-      searchCockTailByListOfIngredient().then((resposta) => {
-        if (!resposta) {
-          return null;
-        }
-
-        return setLista(resposta);
-      });
-    }
+    startList(tipo, setLista);
   }, []);
-  console.log(lista);
   return (
     <div>
       <BarraHeader title={'Explorar Ingredientes'} showTop="true" />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       {lista
         .filter((_, index) => index < 12)
         .map((el, index) => {
@@ -58,7 +45,7 @@ export default function TelaExplorarIngredientes(props) {
           return (
             <Link
               to={`/${tipo}`}
-              onClick={(e) => {
+              onClick={() => {
                 if (tipo === 'comidas') {
                   funcBusca(tipo, ingrediente);
                 } else {
@@ -78,14 +65,6 @@ export default function TelaExplorarIngredientes(props) {
             </Link>
           );
         })}
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       <MenuInferior />
     </div>
   );

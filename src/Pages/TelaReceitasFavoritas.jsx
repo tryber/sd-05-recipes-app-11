@@ -3,7 +3,6 @@ import BarraHeader from '../Components/Barra de Busca - Header/Header';
 import CardFavorite from '../Components/CardFavorite';
 
 export default function TelaReceitasFavoritas() {
-  console.log('vai pro git')
   const [typeSelect, setType] = useState(false);
   let loadFav = JSON.parse(localStorage.getItem('favoriteRecipes'));
   loadFav = !loadFav ? [] : loadFav;

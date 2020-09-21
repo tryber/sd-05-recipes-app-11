@@ -26,7 +26,7 @@ export const searchCockTailByIngredient = (mainIngredient) => (
 );
 
 export const searchCockTailByListOfIngredient = () => (
-  fetch(`https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list`).then(
+  fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list').then(
     (response) => response
       .json()
       .then((list) => list.drinks)

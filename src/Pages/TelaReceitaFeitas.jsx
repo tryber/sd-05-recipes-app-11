@@ -5,7 +5,6 @@ import CardDone from '../Components/CardDone';
 import '../CSS/TelaReceitaFeitas.css';
 
 export default function TelaReceitaFeitas() {
-  console.log('vai pro git')
   const [typeSelect, setType] = useState(false);
   let loadFav = JSON.parse(localStorage.getItem('doneRecipes'));
   loadFav = !loadFav ? [] : loadFav;

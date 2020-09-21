@@ -27,7 +27,7 @@ export const ApiSearchByMainIngredient = (mainIngredient) => (
 );
 
 export const searchMealsByListOfIngredient = () => (
-  fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`).then(
+  fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list').then(
     (response) => response
       .json()
       .then((list) => list.meals)
