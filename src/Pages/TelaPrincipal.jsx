@@ -21,6 +21,7 @@ function TemReceira(receitas, tipo, id) {
 }
 export default function TelaPrincipal(props) {
   const { receitas } = useContext(ReceitasContext);
+  console.log(receitas);
   const tipo = /comida/.test(props.match.path) ? 'comidas' : 'bebidas';
   const id = tipo === 'comidas' ? 'idMeal' : 'idDrink';
   return (

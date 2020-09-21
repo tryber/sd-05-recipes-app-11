@@ -33,3 +33,12 @@ export const searchCockTailById = (id) => (
       .catch((error) => error),
   )
 );
+
+export const searchCockTailRandom = () => (
+  fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`).then((response) =>
+    response
+      .json()
+      .then((drink) => drink.drinks)
+      .catch((error) => error),
+  )
+);
