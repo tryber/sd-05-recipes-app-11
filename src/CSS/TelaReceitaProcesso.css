@@ -39,7 +39,11 @@
   padding: 20px;
 }
 
-input[type=checkbox]:checked ~ label {
+/* input[ type = 'checkbox' ]:checked ~ label {
+  text-decoration: line-through;
+} */
+
+.corta {
   text-decoration: line-through;
 }
 

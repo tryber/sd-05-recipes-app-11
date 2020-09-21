@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+/* import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import blackHeart from '../images/blackHeartIcon.svg';
@@ -223,3 +223,4 @@ Detalhes.propTypes = {
   idDaReceita: propTypes.number.isRequired,
   location: propTypes.string.isRequired,
 };
+ */
