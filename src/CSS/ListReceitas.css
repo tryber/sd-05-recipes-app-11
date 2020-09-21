@@ -1,6 +1,7 @@
 .listReceitas {
   display: flex;
   flex-flow: row wrap;
+  margin-bottom: 15%;
 }
 
 .receita {

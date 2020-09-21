@@ -35,8 +35,26 @@ export const searchMealById = (id) => (
   )
 );
 
-export const searchMealrandom = () => (
+export const searchMealRandom = () => (
   fetch('https://www.themealdb.com/api/json/v1/1/random.php').then((response) =>
+    response
+      .json()
+      .then((meal) => meal.meals)
+      .catch((error) => error),
+  )
+);
+
+export const searchMealFilterArea = () => (
+  fetch(`https://www.themealdb.com/api/json/v1/1/list.php?a=All`).then((response) =>
+    response
+      .json()
+      .then((meal) => meal.meals)
+      .catch((error) => error),
+  )
+);
+
+export const searchMealArea = (area) => (
+  fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`).then((response) =>
     response
       .json()
       .then((meal) => meal.meals)
