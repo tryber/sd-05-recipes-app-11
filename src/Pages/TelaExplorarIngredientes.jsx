@@ -61,7 +61,7 @@ export default function TelaExplorarIngredientes(props) {
               onClick={(e) => {
                 if (tipo === 'comidas') {
                   funcBusca(tipo, ingrediente);
-                }else{
+                } else {
                   funcBusca(tipo, ingrediente);
                 }
               }}
