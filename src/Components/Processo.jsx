@@ -4,8 +4,7 @@ import propTypes from 'prop-types';
 import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
-import '../CSS/TelaReceitaProcesso.css'
-
+import '../CSS/TelaReceitaProcesso.css';
 
 function fotoPrincipal(details) {
   let title = details.strMeal;
@@ -14,17 +13,12 @@ function fotoPrincipal(details) {
     title = details.strDrink;
     foto = details.strDrinkThumb;
   }
-  return (
-    <img
-      src={foto} alt={title} className="recipe-photo"
-      data-testid="recipe-photo"
-    />
-  );
+  return <img src={foto} alt={title} className="recipe-photo" data-testid="recipe-photo" />;
 }
 
 function funcLinks(details, favority, setFavority, copiador, copy) {
   let title = details.strMeal;
-  if (details.strDrink) title = details.strDrink
+  if (details.strDrink) title = details.strDrink;
   return (
     <div className="campoTitle">
       <h1 className="recipe-title" data-testid="recipe-title">
@@ -62,7 +56,7 @@ function addFavority(receita, setFavority) {
     setFavority(false);
     return localStorage.setItem(
       'favoriteRecipes',
-      JSON.stringify(oldFav.filter((el) => el.id !== receita.id)),
+      JSON.stringify(oldFav.filter((el) => el.id !== receita.id))
     );
   }
   const temp = [...oldFav, receita];
@@ -115,14 +109,14 @@ export function funcIngredients(ingredientes, details) {
 export function CopyURL() {
   const endereco = window.location.toString();
   const index = endereco.indexOf('/in-progress');
-  window.navigator.clipboard.writeText(endereco.substring(0,index));
+  window.navigator.clipboard.writeText(endereco.substring(0, index));
 }
 
 function checkboxON(setContCheck, event) {
-  if(event.target.checked) {
+  if (event.target.checked) {
     setContCheck((contCheck) => contCheck + 1);
   } else {
-  setContCheck((contCheck) => contCheck -1);
+    setContCheck((contCheck) => contCheck - 1);
   }
 }
 
@@ -130,35 +124,47 @@ function localSProcess(details, event) {
   const type = details.idMeal ? 'Meal' : 'Drink';
   const chave = details.idMeal ? 'meals' : 'cocktails';
   if (localStorage.getItem('inProgressRecipes') === null) {
-    localStorage.setItem('inProgressRecipes', JSON.stringify({meals:{}, cocktails:{}}))
+    localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: {}, cocktails: {} }));
   }
   const localSAtual = JSON.parse(localStorage.getItem('inProgressRecipes'));
   if (!localSAtual[chave][details[`id${type}`]]) {
     localSAtual[chave][details[`id${type}`]] = [];
   }
-  localSAtual[chave][details[`id${type}`]].push(event.target.id);
+  if (localSAtual[chave][details[`id${type}`]].includes(event.target.id)) {
+    localSAtual[chave][details[`id${type}`]] = localSAtual[chave][details[`id${type}`]].filter(
+      (e) => e !== event.target.id
+    );
+  } else {
+    localSAtual[chave][details[`id${type}`]].push(event.target.id);
+  }
   localStorage.setItem('inProgressRecipes', JSON.stringify(localSAtual));
 }
 
-function carregaLocalStorage(details) {
+function carregaLocalStorage(details, setContCheck) {
   const type = details.idMeal ? 'Meal' : 'Drink';
   const chave = details.idMeal ? 'meals' : 'cocktails';
   if (localStorage.getItem('inProgressRecipes') === null) {
-    localStorage.setItem('inProgressRecipes', JSON.stringify({meals:{}, cocktails:{}}))
+    localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: {}, cocktails: {} }));
   }
   const localSAtual = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  if(!localSAtual[chave][details[`id${type}`]]) return null;
+  if (!localSAtual[chave][details[`id${type}`]]) return null;
   const ingredientes = localSAtual[chave][details[`id${type}`]];
-  ingredientes.forEach((ingredient) => document.getElementById(ingredient).checked = true);
+  setContCheck(0);
+  ingredientes.forEach((ingredient) => {
+    checkboxON(setContCheck, { target: { checked: true } });
+    //document.getElementById(ingredient).checked = true;
+  });
 }
 
 export default function Detalhes(props) {
   const [favority, setFavority] = useState(false);
+  useEffect(() => setFavority(favoriteRecipes), []);
+
   const [copy, copiador] = useState(false);
+
   const [contCheck, setContCheck] = useState(0);
   const { details, favoriteRecipes, status } = props;
-  useEffect(() => setFavority(favoriteRecipes), []);
-  useEffect(() => carregaLocalStorage(details), []);
+  useEffect(() => carregaLocalStorage(details, setContCheck), []);
   const novosIngredientes = funcIngredients([], details);
 
   return (
@@ -171,25 +177,37 @@ export default function Detalhes(props) {
         </h5>
         <h3 className="subTitle">Ingredients</h3>
         <ul className="yellowCamp">
-          {novosIngredientes.map((item) => (
-            <div data-testid="0-ingredient-step">
-              <input type="checkbox" className="ingredient-step"
-                id={item.ingrediente}
-                onClick={(event) => {
-                  checkboxON(setContCheck, event);
-                  localSProcess(details, event);
-                }}/>
-              <label for={item.ingrediente}>{item.ingrediente}- {item.quantidade}</label>
-            </div>
-          ))}
+          {novosIngredientes.map((item) => {
+            return (
+              <div data-testid="0-ingredient-step">
+                <input
+                  type="checkbox"
+                  className="ingredient-step"
+                  id={item.ingrediente}
+                  onClick={(event) => {
+                    checkboxON(setContCheck, event);
+                    localSProcess(details, event);
+                  }}
+                />
+                <label for={item.ingrediente}>
+                  {item.ingrediente}- {item.quantidade}
+                </label>
+              </div>
+            );
+          })}
         </ul>
         <h3 className="subTitle">Instructions:</h3>
-        <p className="yellowCamp" data-testid="instructions">{details.strInstructions}</p>
+        <p className="yellowCamp" data-testid="instructions">
+          {details.strInstructions}
+        </p>
       </div>
       {status === 'done' ? null : (
         <Link to={`/receitas-feitas`}>
-          <button data-testid="finish-recipe-btn" className="finish-recipe-btn" 
-            disabled={contCheck !== novosIngredientes.length}>
+          <button
+            data-testid="finish-recipe-btn"
+            className="finish-recipe-btn"
+            disabled={contCheck !== novosIngredientes.length}
+          >
             Finalizar receita
           </button>
         </Link>
@@ -202,9 +220,6 @@ Detalhes.propTypes = {
   details: propTypes.instanceOf(Object).isRequired,
   favoriteRecipes: propTypes.func.isRequired,
   status: propTypes.string.isRequired,
-  indexRecom: propTypes.number.isRequired,
-  setIndexRecom: propTypes.func.isRequired,
-  sugestDrink: propTypes.arrayOf(propTypes.instanceOf(Object)).isRequired,
   idDaReceita: propTypes.number.isRequired,
   location: propTypes.string.isRequired,
 };

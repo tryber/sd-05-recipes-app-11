@@ -4,6 +4,7 @@ import { searchMealById } from '../Services/ApiComida';
 import { searchCockTailById } from '../Services/ApiBebida';
 import context from '../Context/ReceitasContext';
 import Processo from '../Components/Processo';
+import NewProcesso from '../Components/NewProcesso';
 import '../CSS/TelaDetalhes.css';
 
 export function done(setStatus, id) {
@@ -40,21 +41,19 @@ function inProgressRecipes(setStatus, id, tipo) {
   }
   return null;
 }
-export function updateStatus(id, setStatus, setFavoriteRecipes, tipo) {
-  done(setStatus, id);
+export function updateStatus(id, setFavoriteRecipes, tipo) {
+  /* done(setStatus, id); */
   favoriteRecipes(setFavoriteRecipes, id);
-  inProgressRecipes(setStatus, id, tipo);
+  /* inProgressRecipes(setStatus, id, tipo); */
   return null;
 }
 export default function TelaProcesso(props) {
-  const { sugestDrink } = useContext(context);
   const [details, setDetails] = useState(undefined);
-  const [indexRecom, setIndexRecom] = useState(0);
   const [status, setStatus] = useState('nothing');
   const [favorite, setFavorite] = useState(false);
   const { id_da_receita: idDaReceita } = props.match.params;
   useEffect(() => {
-    if(props.location.pathname.includes('comida')) {
+    if (props.location.pathname.includes('comida')) {
       searchMealById(idDaReceita).then((resposta) => {
         if (!resposta) {
           return null;
@@ -63,29 +62,18 @@ export default function TelaProcesso(props) {
       });
     } else {
       searchCockTailById(idDaReceita).then((resposta) => {
-      if (!resposta) {
-        return null;
-      }
-      return setDetails(resposta[0]);
+        if (!resposta) {
+          return null;
+        }
+        return setDetails(resposta[0]);
       });
     }
-    updateStatus(idDaReceita, setStatus, setFavorite, 'meals');
+    updateStatus(idDaReceita, setFavorite, 'meals');
   }, []);
   if (!details) {
     return <h1>Carregando . . .</h1>;
   }
-  return (
-    <Processo
-      details={details}
-      favoriteRecipes={favorite}
-      status={status}
-      indexRecom={indexRecom}
-      setIndexRecom={setIndexRecom}
-      sugestDrink={sugestDrink}
-      idDaReceita={idDaReceita}
-      location={props.location}
-    />
-  );
+  return <NewProcesso details={details} favoriteRecipes={favorite} idDaReceita={idDaReceita} />;
 }
 TelaProcesso.propTypes = {
   match: propTypes.shape({ params: propTypes.number.isRequired }).isRequired,
