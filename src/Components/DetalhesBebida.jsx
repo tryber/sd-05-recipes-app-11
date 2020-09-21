@@ -89,7 +89,6 @@ function funcLinks(details, favority, setFavority, copy, copiador) {
 }
 
 export default function Detalhes(props) {
-  console.log(props);
   const [favority, setFavority] = useState(false);
   const [copy, copiador] = useState(false);
   const {
