@@ -36,7 +36,7 @@ export const searchMealById = (id) => (
 );
 
 export const searchMealrandom = () => (
-  fetch(`https://www.themealdb.com/api/json/v1/1/random.php`).then((response) =>
+  fetch('https://www.themealdb.com/api/json/v1/1/random.php').then((response) =>
     response
       .json()
       .then((meal) => meal.meals)

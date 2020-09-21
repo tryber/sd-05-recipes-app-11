@@ -35,7 +35,7 @@ export const searchCockTailById = (id) => (
 );
 
 export const searchCockTailRandom = () => (
-  fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`).then((response) =>
+  fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php').then((response) =>
     response
       .json()
       .then((drink) => drink.drinks)

@@ -1,11 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { searchMealrandom } from '../Services/ApiComida';
 import { searchCockTailRandom } from '../Services/ApiBebida';
 import MenuInferior from '../Components/MenuInferior';
 import BarraHeader from '../Components/Barra de Busca - Header/Header';
-import ReceitasContext from '../Context/ReceitasContext';
 import '../CSS/TelaExplorarBebidaComida.css';
 
 export default function TelaExplorarBebidaComida(props) {
@@ -13,17 +12,13 @@ export default function TelaExplorarBebidaComida(props) {
   const [exploreSurpriseCockTail, setExploreSurpriseCockTail] = useState(undefined);
   useEffect(() => {
     searchMealrandom().then((resposta) => {
-      if (!resposta) {
-        return null;
-      }
+      if (!resposta) return null;
       return setExploreSurpriseMeal(resposta[0].idMeal);
     });
   }, []);
   useEffect(() => {
     searchCockTailRandom().then((resposta) => {
-      if (!resposta) {
-        return null;
-      }
+      if (!resposta) return null;
       return setExploreSurpriseCockTail(resposta[0].idDrink);
     });
   }, []);
