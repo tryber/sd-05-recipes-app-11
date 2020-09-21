@@ -1,15 +1,12 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
 
 const CardIngredient = (props) => {
-  const { title, image } = props;
+  const { title, image, index } = props;
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={image} />
-      <Card.Body>
-        <Card.Title>{title}</Card.Title>
-      </Card.Body>
-    </Card>
+    <div data-testid={`${index}-ingredient-card`}>
+      <img src={image} alt={title} data-testid={`${index}-card-img`}/>
+      <p data-testid={`${index}-card-name`}>{title}</p>
+    </div>
   );
 };
 

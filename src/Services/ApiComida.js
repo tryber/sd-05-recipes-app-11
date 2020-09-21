@@ -26,6 +26,15 @@ export const ApiSearchByMainIngredient = (mainIngredient) => (
   )
 );
 
+export const searchMealsByListOfIngredient = () => (
+  fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`).then(
+    (response) => response
+      .json()
+      .then((list) => list.meals)
+      .catch((error) => error),
+  )
+);
+
 export const searchMealById = (id) => (
   fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`).then((response) =>
     response
