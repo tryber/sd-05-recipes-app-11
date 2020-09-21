@@ -7,9 +7,7 @@ import '../CSS/TelaDetalhes.css';
 import { favoriteRecipes } from './TelaDetalhesComida';
 
 export function updateStatus(id, setFavoriteRecipes) {
-  /* done(setStatus, id); */
   favoriteRecipes(setFavoriteRecipes, id);
-  /* inProgressRecipes(setStatus, id, tipo); */
   return null;
 }
 export default function TelaProcesso(props) {
