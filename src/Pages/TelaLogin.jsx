@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../images/open-baladin-roma.png';
 import '../CSS/TelaLogin.css';
-import Context from '../Context/ReceitasContext';
 
 // HA https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
 function validateEmail(email) {
@@ -10,12 +10,10 @@ function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
-function onclickFunction(email) {
+function onclickFuntion(email) {
   if (!localStorage.getItem('mealsToken')) localStorage.setItem('mealsToken', '1');
   if (!localStorage.getItem('cocktailsToken')) localStorage.setItem('cocktailsToken', '1');
-  if (!localStorage.getItem('user')) {
-    localStorage.setItem('user', JSON.stringify({ email }));
-  }
+  if (!localStorage.getItem('user')) localStorage.setItem('user', JSON.stringify({ email }));
 }
 /*   localStorage.setItem('doneRecipes', [{
       id: id-da-receita,
@@ -49,8 +47,8 @@ function onclickFunction(email) {
   }); */
 
 export default function Login() {
-  const { setEmail, email } = useContext(Context);
   const [validation, setValidation] = useState(true);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   useEffect(() => {
     if (validateEmail(email) && password.length > 6) {
@@ -86,7 +84,7 @@ export default function Login() {
           data-testid="login-submit-btn"
           className="loginButton"
           type="button"
-          onClick={() => onclickFunction(email)}
+          onClick={() => onclickFuntion(email)}
           disabled={validation}
         >
           Entrar
