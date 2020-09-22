@@ -7,22 +7,20 @@ import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 
-/* function convertFoodDone(food) {
-  console.log(food);
+export function convertFoodDone(food,tipo) {
   const saida = {
-    id: food.idMeal,
-    type: 'comida',
+    id: food[`id${tipo}`],
+    type: tipo==='Meal'?'comida':'bebida',
     area: food.strArea,
     category: food.strCategory,
-    alcoholicOrNot: 'Not',
-    name: food.strMeal,
-    image: food.strMealThumb,
-    doneDate,
-    tags: food.strTags,
+    alcoholicOrNot: !food.strAlcoholic?'Not':food.strAlcoholic,
+    name: food[`str${tipo}`],
+    image: food[`str${tipo}Thumb`],
+    doneDate: new Date().toLocaleDateString(),
+    tags: [food.strTags],
   };
-  console.log(saida);
   return saida;
-} */
+}
 
 function fotoPrincipal(details) {
   return (

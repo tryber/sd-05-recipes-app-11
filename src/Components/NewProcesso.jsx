@@ -5,6 +5,7 @@ import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import '../CSS/TelaReceitaProcesso.css';
+import { convertFoodDone } from './DetalhesComida';
 
 function fotoPrincipal(details) {
   let title = details.strMeal;
@@ -27,7 +28,7 @@ function addFavorite(receita, setFavorite) {
     setFavorite(false);
     return localStorage.setItem(
       'favoriteRecipes',
-      JSON.stringify(oFav.filter((el) => el.id !== receita.id)),
+      JSON.stringify(oFav.filter((el) => el.id !== receita.id))
     );
   }
   const temp = [...oFav, receita];
@@ -193,11 +194,43 @@ InputCheck.propTypes = {
   setDone: propTypes.func.isRequired,
 };
 
+function moveToDone(details) {
+  const { type, chave } = createBasicLocal(details);
+  const localSAtual = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const sendToDone = localSAtual[chave][details[`id${type}`]];
+  delete localSAtual[chave][details[`id${type}`]];
+  localStorage.setItem('inProgressRecipes', JSON.stringify(localSAtual));
+  const temp = convertFoodDone(details, type);
+  if (localStorage.getItem('doneRecipes') === null) {
+    localStorage.setItem('doneRecipes', JSON.stringify([]));
+  }
+  const doneAtual = JSON.parse(localStorage.getItem('doneRecipes'));
+  doneAtual.push(temp);
+  console.log('Local Storage', doneAtual);
+
+  localStorage.setItem('doneRecipes', JSON.stringify(doneAtual));
+}
+/* [{
+    id: id-da-receita,
+    type: comida-ou-bebida,
+    area: area-da-receita-ou-texto-vazio,
+    category: categoria-da-receita-ou-texto-vazio,
+    alcoholicOrNot: alcoholic-ou-non-alcoholic-ou-texto-vazio,
+    name: nome-da-receita,
+    image: imagem-da-receita,
+    doneDate: quando-a-receita-foi-concluida,
+    tags: array-de-tags-da-receita-ou-array-vazio
+}] */
 function Botao(props) {
-  const { habilita } = props;
+  const { habilita, details } = props;
   return (
     <Link to={'/receitas-feitas'}>
-      <button data-testid="finish-recipe-btn" className="finish-recipe-btn" disabled={!habilita}>
+      <button
+        data-testid="finish-recipe-btn"
+        className="finish-recipe-btn"
+        disabled={!habilita}
+        onClick={() => moveToDone(details)}
+      >
         Finalizar receita
       </button>
     </Link>
@@ -246,7 +279,7 @@ export default function Detalhes(props) {
           {details.strInstructions}
         </p>
       </div>
-      <Botao habilita={novosIngredientes.every((el) => el.checked)} />
+      <Botao habilita={novosIngredientes.every((el) => el.checked)} details={details} />
     </div>
   );
 }
