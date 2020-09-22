@@ -40,7 +40,7 @@ describe('Todos os elementos devem respeitar os atributos descritos no protótip
     areasMock.meals.forEach(({ strArea: area }) => {
       cy.get(`[data-testid="${area}-option"]`);
     });
-
+    console.log(areasMock.meals)
     for (let index = 0; index < 12; index += 1) {
       cy.get(`[data-testid="${index}-recipe-card"]`);
       cy.get(`[data-testid="${index}-card-img"]`);

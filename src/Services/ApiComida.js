@@ -54,7 +54,7 @@ export const searchMealRandom = () => (
 );
 
 export const searchMealFilterArea = () => (
-  fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=All').then((response) =>
+  fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list').then((response) =>
     response
       .json()
       .then((meal) => meal.meals)
