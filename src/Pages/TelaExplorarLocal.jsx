@@ -10,7 +10,7 @@ function filterLocate(filtroDeLocais, setLocalSelect) {
   return (
     <div>
       <select
-        data-testid="All-category-filter" type="ComboBox" className="localização"
+        data-testid="explore-by-area-dropdown" type="ComboBox" className="localização"
         name="localização" onChange={(event) => setLocalSelect(event.target.value)}
       >
         {localizações.map((area) => <option
@@ -25,13 +25,7 @@ function filterLocate(filtroDeLocais, setLocalSelect) {
 }
 
 function TemReceira(receitas) {
-  console.log(receitas);
   if (!receitas) return null;
-  /* if (receitas.length === 1) {
-    return <Redirect to={`/comidas/${receitas[0]['idMeal']}`} />;
-  } else if (receitas.length === 0) {
-    return null;
-  } */
   return (
     <div>
       <ListReceitasPorLocal receitas={receitas} />

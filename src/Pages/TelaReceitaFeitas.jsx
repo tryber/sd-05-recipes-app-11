@@ -12,13 +12,25 @@ export default function TelaReceitaFeitas() {
     <div>
       <BarraHeader title={'Receitas Feitas'} showTop="true" />
       <div className="feitasBuddy">
-        <button className="yellowCamp" data-testid="filter-by-all-btn" onClick={() => setType(false)}>
+        <button
+          className="yellowCamp"
+          data-testid="filter-by-all-btn"
+          onClick={() => setType(false)}
+        >
           All
         </button>
-        <button className="yellowCamp" data-testid="filter-by-food-btn" onClick={() => setType('comida')}>
+        <button
+          className="yellowCamp"
+          data-testid="filter-by-food-btn"
+          onClick={() => setType('comida')}
+        >
           Food
         </button>
-        <button className="yellowCamp" data-testid="filter-by-drink-btn" onClick={() => setType('bebida')}>
+        <button
+          className="yellowCamp"
+          data-testid="filter-by-drink-btn"
+          onClick={() => setType('bebida')}
+        >
           Drinks
         </button>
         {loadFav
