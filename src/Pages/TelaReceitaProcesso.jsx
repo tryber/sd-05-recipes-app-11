@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import { searchMealById } from '../Services/ApiComida';
 import { searchCockTailById } from '../Services/ApiBebida';
-import NewProcesso from '../Components/NewProcesso';
-import '../CSS/TelaDetalhes.css';
 import { favoriteRecipes } from './TelaDetalhesComida';
+import NewProcesso from '../Components/NewProcesso';
 
 export function updateStatus(id, setFavoriteRecipes) {
   favoriteRecipes(setFavoriteRecipes, id);

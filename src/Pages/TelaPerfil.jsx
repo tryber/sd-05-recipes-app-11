@@ -5,7 +5,8 @@ import BarraHeader from '../Components/Barra de Busca - Header/Header';
 import '../CSS/TelaPerfil.css';
 
 export default function TelaPerfil() {
-  const email = JSON.parse(localStorage.getItem('user'));
+  let email = JSON.parse(localStorage.getItem('user'));
+  email = ! email ? {email:''} : email;
   return (
     <div>
       <BarraHeader title={'Perfil'} showTop="true" />
