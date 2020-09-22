@@ -10,8 +10,9 @@ function filterLocate(filtroDeLocais, setLocalSelect) {
   return (
     <div>
       <select
-        data-testid="explore-by-area-dropdown" type="ComboBox" className="localização"
-        name="localização" onChange={(event) => setLocalSelect(event.target.value)}
+        data-testid="explore-by-area-dropdown"
+        type="ComboBox" className="localizacao"
+        name="localizacao" onChange={(event) => setLocalSelect(event.target.value)}
       >
         {localizações.map((area) => <option
           data-testid={`${area}-option`}

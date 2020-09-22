@@ -6,6 +6,7 @@ import DetalhesComida from '../Components/DetalhesComida';
 import '../CSS/TelaDetalhes.css';
 
 export function done(setStatus, id) {
+  
   let doneVar = localStorage.getItem('doneRecipes');
   if (doneVar) {
     doneVar = JSON.parse(doneVar);
