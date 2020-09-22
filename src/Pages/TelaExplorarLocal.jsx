@@ -50,7 +50,7 @@ export default function TelaExplorarLocal() {
     searchMealFilterArea().then((resposta) => {
       if (!resposta) return null;
       const areas = resposta.map((res) => res.strArea);
-      setfiltroDeLocais(areas);
+      return setfiltroDeLocais(areas);
     });
     ApiSearchMealByName('').then((el) => setLista(el));
   }, []);

@@ -6,7 +6,7 @@ import '../CSS/TelaPerfil.css';
 
 export default function TelaPerfil() {
   let email = JSON.parse(localStorage.getItem('user'));
-  email = ! email ? {email:''} : email;
+  email = !email ? { email: '' } : email;
   return (
     <div>
       <BarraHeader title={'Perfil'} showTop="true" />
