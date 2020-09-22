@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Receita from './Receita';
-import '../CSS/ListReceitas.css';
 
 export default function ListReceitas(props) {
   const { receitas } = props;

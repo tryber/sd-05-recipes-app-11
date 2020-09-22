@@ -239,16 +239,17 @@ function Botao(props) {
 Botao.propTypes = {
   habilita: propTypes.bool.isRequired,
 };
+
 export default function Detalhes(props) {
   const { details, favoriteRecipes } = props;
   const [used, setDone] = useState(false);
+  console.log(used);
   const [copy, copiador] = useState(false);
   const [favority, setFavority] = useState(false);
   useEffect(() => setFavority(favoriteRecipes), []);
   const [usedIngredients, setUsed] = useState([]);
   const novosIngredientes = funcIngredients([], details);
   useEffect(() => setUsed(updateUsedIngredients(details, setDone, novosIngredientes)), []);
-  console.log(used);
   return (
     <div>
       {fotoPrincipal(details)}
@@ -258,7 +259,7 @@ export default function Detalhes(props) {
           {details.strCategory}
         </h5>
         <h3 className="subTitle">Ingredients</h3>
-        <ul className="yellowCamp">
+        <ul className="yellowCampProcesso">
           {novosIngredientes.map((item) => (
             <div data-testid="0-ingredient-step">
               <InputCheck
@@ -275,7 +276,7 @@ export default function Detalhes(props) {
           ))}
         </ul>
         <h3 className="subTitle">Instructions:</h3>
-        <p className="yellowCamp" data-testid="instructions">
+        <p className="yellowCampProcesso" data-testid="instructions">
           {details.strInstructions}
         </p>
       </div>

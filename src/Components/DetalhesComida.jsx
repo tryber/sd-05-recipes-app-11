@@ -183,7 +183,7 @@ export default function Detalhes(props) {
           {details.strCategory}
         </h5>
         <h3 className="subTitle">Ingredients</h3>
-        <ul className="yellowCamp">
+        <ul className="yellowCampDetalhes">
           {novosIngredientes.map((item, index) => (
             <li key={item.ingrediente} data-testid={`${index}-ingredient-name-and-measure`}>
               {item.ingrediente}- {item.quantidade}
@@ -191,7 +191,7 @@ export default function Detalhes(props) {
           ))}
         </ul>
         <h3 className="subTitle">Instructions:</h3>
-        <p className="yellowCamp" data-testid="instructions">{details.strInstructions}</p>
+        <p className="yellowCampDetalhes" data-testid="instructions">{details.strInstructions}</p>
         <h3 className="subTitle">Video</h3>
         <ReactPlayer url={details.strYoutube} data-testid="video" width="100%" height="100%" />
         <h3 className="subTitle">Recomendações</h3>

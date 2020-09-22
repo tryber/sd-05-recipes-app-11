@@ -28,13 +28,7 @@ function filterLocate(filtroDeLocais, setLocalSelect) {
 }
 
 function TemReceira(receitas) {
-  console.log(receitas);
   if (!receitas) return null;
-  /* if (receitas.length === 1) {
-    return <Redirect to={`/comidas/${receitas[0]['idMeal']}`} />;
-  } else if (receitas.length === 0) {
-    return null;
-  } */
   return (
     <div>
       <ListReceitasPorLocal receitas={receitas} />

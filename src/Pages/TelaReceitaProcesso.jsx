@@ -4,6 +4,7 @@ import { searchMealById } from '../Services/ApiComida';
 import { searchCockTailById } from '../Services/ApiBebida';
 import { favoriteRecipes } from './TelaDetalhesComida';
 import NewProcesso from '../Components/NewProcesso';
+import '../CSS/TelaReceitaProcesso.css';
 
 export function updateStatus(id, setFavoriteRecipes) {
   favoriteRecipes(setFavoriteRecipes, id);
