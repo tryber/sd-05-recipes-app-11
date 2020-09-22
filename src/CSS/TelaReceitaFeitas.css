@@ -1,3 +1,7 @@
+.feitasBuddy {
+  margin: 20% 2%;
+}
+
 .horizontal-image {
   width: 100%;
 }
@@ -35,8 +39,9 @@
   background-color: #e07d0d;
   border-radius: 10px;
   color: black;
-  margin: 0;
+  margin: 0 2%;
   padding: 20px;
+  width: 29%;
 }
 
 .recomendation-card {

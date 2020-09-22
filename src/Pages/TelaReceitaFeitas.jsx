@@ -10,25 +10,23 @@ export default function TelaReceitaFeitas() {
   loadFav = !loadFav ? [] : loadFav;
   return (
     <div>
-      <br />
-      <br />
-      <br />
-      <br />
       <BarraHeader title={'Receitas Feitas'} showTop="true" />
-      <button data-testid="filter-by-all-btn" onClick={() => setType(false)}>
-        All
-      </button>
-      <button data-testid="filter-by-food-btn" onClick={() => setType('comida')}>
-        Food
-      </button>
-      <button data-testid="filter-by-drink-btn" onClick={() => setType('bebida')}>
-        Drinks
-      </button>
-      {loadFav
-        .filter((el) => (typeSelect ? el.type === typeSelect : true))
-        .map((el, index) => (
-          <CardDone item={el} index={index} />
-        ))}
+      <div className="feitasBuddy">
+        <button className="yellowCamp" data-testid="filter-by-all-btn" onClick={() => setType(false)}>
+          All
+        </button>
+        <button className="yellowCamp" data-testid="filter-by-food-btn" onClick={() => setType('comida')}>
+          Food
+        </button>
+        <button className="yellowCamp" data-testid="filter-by-drink-btn" onClick={() => setType('bebida')}>
+          Drinks
+        </button>
+        {loadFav
+          .filter((el) => (typeSelect ? el.type === typeSelect : true))
+          .map((el, index) => (
+            <CardDone item={el} index={index} />
+          ))}
+      </div>
     </div>
   );
 }

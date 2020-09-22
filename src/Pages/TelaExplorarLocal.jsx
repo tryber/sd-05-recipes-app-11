@@ -57,7 +57,7 @@ export default function TelaExplorarLocal() {
   }, [localSelect]);
   return (
     <div>
-      <BarraBuscaHeader title={'comidas'} />
+      <BarraBuscaHeader title={'Explorar Origem'} />
       {filterLocate(filtroDeLocais, setLocalSelect)}
       {TemReceira(explorarLocal)}
       <MenuInferior />
