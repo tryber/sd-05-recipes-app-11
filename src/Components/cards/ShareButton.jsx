@@ -22,7 +22,7 @@ export default function ShareOption(props) {
         CopyURL(`${localizaAddress()}/${props.item.type}s/${props.item.id}`);
       }}
     >
-      <img src={shareIcon} alt="Share Icon" data-testid={`${index}-horizontal-share-btn`} />
+      <img className="iconCard" src={shareIcon} alt="Share Icon" data-testid={`${index}-horizontal-share-btn`} />
       {copy ? <span>Link copiado!</span> : null}
     </Link>
   );

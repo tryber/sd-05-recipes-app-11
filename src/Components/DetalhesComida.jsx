@@ -7,13 +7,13 @@ import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 
-export function convertFoodDone(food,tipo) {
+export function convertFoodDone(food, tipo) {
   const saida = {
     id: food[`id${tipo}`],
-    type: tipo==='Meal'?'comida':'bebida',
+    type: tipo === 'Meal' ? 'comida' : 'bebida',
     area: food.strArea,
     category: food.strCategory,
-    alcoholicOrNot: !food.strAlcoholic?'Not':food.strAlcoholic,
+    alcoholicOrNot: !food.strAlcoholic ? 'Not' : food.strAlcoholic,
     name: food[`str${tipo}`],
     image: food[`str${tipo}Thumb`],
     doneDate: new Date().toLocaleDateString(),

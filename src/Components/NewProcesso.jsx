@@ -27,8 +27,7 @@ function addFavorite(receita, setFavorite) {
   if (oFav.find((el) => el.id === receita.id)) {
     setFavorite(false);
     return localStorage.setItem(
-      'favoriteRecipes',
-      JSON.stringify(oFav.filter((el) => el.id !== receita.id))
+      'favoriteRecipes', JSON.stringify(oFav.filter((el) => el.id !== receita.id)),
     );
   }
   const temp = [...oFav, receita];
@@ -71,10 +70,8 @@ function funcLinks(details, favority, setFavority, copiador, copy) {
       </h1>
       <Link onClick={() => convertFavorite(details, setFavority)}>
         <img
-          src={favority ? blackHeart : whiteHeart}
-          alt="like icon"
-          className="icon"
-          data-testid="favorite-btn"
+          src={favority ? blackHeart : whiteHeart} alt="like icon"
+          className="icon" data-testid="favorite-btn"
         />
       </Link>
       <Link
@@ -113,8 +110,7 @@ export function funcIngredients(ingredients, detalhes) {
   const used = teste(detalhes);
   for (let i = 1; i < 20; i += 1) {
     if (
-      detalhes[`strIngredient${i}`] !== null &&
-      detalhes[`strIngredient${i}`] !== '' &&
+      detalhes[`strIngredient${i}`] !== null && detalhes[`strIngredient${i}`] !== '' &&
       detalhes[`strIngredient${i}`] !== undefined
     ) {
       ingredients.push({
@@ -166,9 +162,7 @@ function InputCheck(props) {
   if (!item.checked) {
     return (
       <input
-        type="checkbox"
-        className="ingredient-step"
-        id={item.ingrediente}
+        type="checkbox" className="ingredient-step" id={item.ingrediente}
         onClick={() => {
           action(details, setDone);
         }}
@@ -177,13 +171,10 @@ function InputCheck(props) {
   }
   return (
     <input
-      type="checkbox"
-      className="ingredient-step"
-      id={item.ingrediente}
+      type="checkbox" className="ingredient-step" id={item.ingrediente}
       onClick={() => {
         action(details, setDone);
-      }}
-      checked
+      }} checked
     />
   );
 }
@@ -197,7 +188,7 @@ InputCheck.propTypes = {
 function moveToDone(details) {
   const { type, chave } = createBasicLocal(details);
   const localSAtual = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  const sendToDone = localSAtual[chave][details[`id${type}`]];
+  /* const sendToDone = localSAtual[chave][details[`id${type}`]]; */
   delete localSAtual[chave][details[`id${type}`]];
   localStorage.setItem('inProgressRecipes', JSON.stringify(localSAtual));
   const temp = convertFoodDone(details, type);
@@ -226,10 +217,8 @@ function Botao(props) {
   return (
     <Link to={'/receitas-feitas'}>
       <button
-        data-testid="finish-recipe-btn"
-        className="finish-recipe-btn"
-        disabled={!habilita}
-        onClick={() => moveToDone(details)}
+        data-testid="finish-recipe-btn" className="finish-recipe-btn"
+        disabled={!habilita} onClick={() => moveToDone(details)}
       >
         Finalizar receita
       </button>
@@ -238,6 +227,7 @@ function Botao(props) {
 }
 Botao.propTypes = {
   habilita: propTypes.bool.isRequired,
+  details: propTypes.instanceOf(Object).isRequired,
 };
 
 export default function Detalhes(props) {
@@ -248,7 +238,7 @@ export default function Detalhes(props) {
   const [favority, setFavority] = useState(false);
   useEffect(() => setFavority(favoriteRecipes), []);
   const [usedIngredients, setUsed] = useState([]);
-  const novosIngredientes = funcIngredients([], details);
+  let novosIngredientes = funcIngredients([], details);
   useEffect(() => setUsed(updateUsedIngredients(details, setDone, novosIngredientes)), []);
   return (
     <div>
@@ -263,11 +253,8 @@ export default function Detalhes(props) {
           {novosIngredientes.map((item) => (
             <div data-testid="0-ingredient-step">
               <InputCheck
-                item={item}
-                used={usedIngredients}
-                action={changeStorage}
-                details={details}
-                setDone={setDone}
+                item={item} used={usedIngredients} action={changeStorage}
+                details={details} setDone={setDone}
               />
               <label htmlFor={item.ingrediente} className={item.checked ? 'corta' : ''}>
                 {item.ingrediente}- {item.quantidade}
