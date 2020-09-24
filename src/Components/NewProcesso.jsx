@@ -238,7 +238,7 @@ export default function Detalhes(props) {
   const [favority, setFavority] = useState(false);
   useEffect(() => setFavority(favoriteRecipes), []);
   const [usedIngredients, setUsed] = useState([]);
-  let novosIngredientes = funcIngredients([], details);
+  const novosIngredientes = funcIngredients([], details);
   useEffect(() => setUsed(updateUsedIngredients(details, setDone, novosIngredientes)), []);
   return (
     <div>
