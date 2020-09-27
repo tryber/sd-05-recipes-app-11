@@ -32,11 +32,11 @@ export default function TelaReceitasFavoritas() {
         >
           Drinks
         </button>
-      {loadFav
+        {loadFav
         .filter((el) => (typeSelect ? el.type === typeSelect : true))
         .map((el, index) => (
           <CardFavorite item={el} index={index} />
-          ))}
+        ))}
       </div>
     </div>
   );
