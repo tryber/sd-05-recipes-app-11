@@ -23,18 +23,16 @@ export default function CardFavorite(props) {
   const [copy, setCopy] = useState(false);
   const isMeal = type === 'comida';
   return (
-    <div>
+    <div className="receitaCard">
       <ImageTop item={item} index={index} />
-      <div>
-        <div>
+      <div className="buddyCard">
+        <div className="textCard">
           {isMeal ? (
             <p data-testid={`${index}-horizontal-top-text`}>{`${area} - ${category}`}</p>
           ) : (
             <p data-testid={`${index}-horizontal-top-text`}>{alcoholicOrNot}</p>
           )}
           <ShareOption index={index} copy={copy} item={item} setCopy={setCopy} />
-          <br />
-          <br />
           <Link onClick={() => desFavorite(id)}>
             <img
               src={blackHeart}
