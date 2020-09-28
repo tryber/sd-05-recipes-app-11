@@ -15,6 +15,7 @@ import {
   searchCockTailByName,
   searchCockTailCategory,
 } from '../Services/ApiBebida';
+import '../CSS/TelaPrincipal.css';
 
 function TemReceira(receitas, tipo, id, automaticRedirection) {
   if (typeof receitas !== 'object' || !receitas) return null;
@@ -86,20 +87,23 @@ export default function TelaPrincipal(props) {
   return (
     <div>
       <BarraBuscaHeader title={tipo} automatic={setAutomatic} />
-      {categorias.map((el) => (
-        <button
-          onClick={(e) => {
-            if (e.target.innerText === 'All' || e.target.innerText === selecCat) {
-              setSelecCat('');
-            } else {
-              setSelecCat(e.target.innerText);
-            }
-          }}
-          data-testid={`${el}-category-filter`}
-        >
-          {el}
-        </button>
-      ))}
+      <div className="bottonBlock">
+        {categorias.map((el) => (
+          <button
+            onClick={(e) => {
+              if (e.target.innerText === 'All' || e.target.innerText === selecCat) {
+                setSelecCat('');
+              } else {
+                setSelecCat(e.target.innerText);
+              }
+            }}
+            data-testid={`${el}-category-filter`}
+            className="yellowPrincipal"
+          >
+            {el}
+          </button>
+        ))}
+      </div>
       {TemReceira(receitas, tipo, id, automatic)}
       <MenuInferior />
     </div>
