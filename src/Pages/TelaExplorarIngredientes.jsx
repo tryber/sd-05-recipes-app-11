@@ -7,6 +7,7 @@ import CardIngredient from '../Components/cards/CardIngredient';
 import { searchMealsByListOfIngredient } from '../Services/ApiComida';
 import { searchCockTailByListOfIngredient } from '../Services/ApiBebida';
 import Context from '../Context/ReceitasContext';
+import '../CSS/ListReceitas.css';
 
 function startList(tipo, setLista) {
   if (tipo === 'comidas') {
@@ -41,36 +42,35 @@ export default function TelaExplorarIngredientes(props) {
   return (
     <div>
       <BarraHeader title={'Explorar Ingredientes'} showTop="true" />
-      {!lista
-        ? null
-        : lista
-            .filter((_, index) => index < 12)
-            .map((el, index) => {
-              const ingrediente = tipo === 'comidas' ? el.strIngredient : el.strIngredient1;
-              return (
-                <Link
-                  to={`/${tipo}`}
-                  onClick={() => {
-                    if (tipo === 'comidas') {
-                      funcBusca(tipo, ingrediente);
-                    } else {
-                      funcBusca(tipo, ingrediente);
-                    }
-                    setRedirecionado(true);
-                  }}
-                >
-                  <CardIngredient
-                    index={index}
-                    title={tipo === 'comidas' ? ingrediente : el.strIngredient1}
-                    image={
-                      tipo === 'comidas'
-                        ? `https://www.themealdb.com/images/ingredients/${el.strIngredient}-Small.png`
-                        : `https://www.thecocktaildb.com/images/ingredients/${el.strIngredient1}-Small.png `
-                    }
-                  />
-                </Link>
-              );
-            })}
+      <div className="listReceitas marginTop">
+        {!lista ? null : lista
+          .filter((_, index) => index < 12)
+          .map((el, index) => {
+            const ingrediente = tipo === 'comidas' ? el.strIngredient : el.strIngredient1;
+            return (
+              <Link
+                className="receitaLink" to={`/${tipo}`}
+                onClick={() => {
+                  if (tipo === 'comidas') {
+                    funcBusca(tipo, ingrediente);
+                  } else {
+                    funcBusca(tipo, ingrediente);
+                  }
+                  setRedirecionado(true);
+                }}
+              >
+                <CardIngredient
+                  index={index} title={tipo === 'comidas' ? ingrediente : el.strIngredient1}
+                  image={
+                    tipo === 'comidas'
+                      ? `https://www.themealdb.com/images/ingredients/${el.strIngredient}-Small.png`
+                      : `https://www.thecocktaildb.com/images/ingredients/${el.strIngredient1}-Small.png `
+                  }
+                />
+              </Link>
+            );
+          })}
+      </div>
       <MenuInferior />
     </div>
   );
