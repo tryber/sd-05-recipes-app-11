@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import BarraHeader from '../Components/Barra de Busca - Header/Header';
 import CardDone from '../Components/CardDone';
-
-import '../CSS/TelaReceitaFeitas.css';
+import '../CSS/TelaReceitaFeitasOuFavoritas.css';
 
 export default function TelaReceitaFeitas() {
   const [typeSelect, setType] = useState(false);
@@ -37,7 +36,7 @@ export default function TelaReceitaFeitas() {
           .filter((el) => (typeSelect ? el.type === typeSelect : true))
           .map((el, index) => (
             <CardDone item={el} index={index} />
-          ))}
+            ))}
       </div>
     </div>
   );

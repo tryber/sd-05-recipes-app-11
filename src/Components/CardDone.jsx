@@ -15,10 +15,10 @@ export default function CardDone(props) {
   const [copy, setCopy] = useState(false);
   const isMeal = type === 'comida';
   return (
-    <div>
+    <div className="receitaCard">
       <ImageTop item={item} index={index} />
-      <div>
-        <div>
+      <div className="buddyCard">
+        <div className="textCard">
           {isMeal ? (
             <p data-testid={`${index}-horizontal-top-text`}>{`${area} - ${category}`}</p>
           ) : (
@@ -27,8 +27,10 @@ export default function CardDone(props) {
           <ShareOption index={index} copy={copy} item={item} setCopy={setCopy} />
           <HorizontalName item={item} index={index} />
         </div>
-        <span>Feita em: </span>{' '}
-        <span data-testid={`${index}-horizontal-done-date`}>{doneDate}</span>
+        <div className="feitaCard">
+          <span className="feitaCard">Feita em: </span>{' '}
+          <span data-testid={`${index}-horizontal-done-date`}>{doneDate}</span>
+        </div>
         {isMeal ? tags.map((tagName) => <Tags tagName={tagName} index={index} />) : null}
       </div>
     </div>

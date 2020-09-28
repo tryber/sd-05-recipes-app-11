@@ -6,7 +6,7 @@ export default function HorizontalName(props) {
   const { index, item } = props;
   const { type, name } = item;
   return (
-    <Link to={`/${type}s/${item.id}`}>
+    <Link className="nomeCard" to={`/${type}s/${item.id}`}>
       <p data-testid={`${index}-horizontal-name`}>{name}</p>
     </Link>
   );
