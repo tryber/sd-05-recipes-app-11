@@ -39,6 +39,7 @@ export function filterComidas(title, optionsValue, searchValue, setReceitas, set
   } else if (optionsValue === 'ingrediente') {
     ApiSearchByMainIngredient(searchValue)
       .then((ListaComidasPorIngrediente) => {
+        console.log(ListaComidasPorIngrediente);
         setReceitas(ListaComidasPorIngrediente);
         noElements(ListaComidasPorIngrediente);
       })
@@ -126,6 +127,14 @@ function funcBusca1(tipo, ingrediente, title, setReceitas, setIsFetching) {
         : filterBebidas(title, 'ingrediente', ingrediente, setReceitas, setIsFetching);
   }; */
 
+function UseFilterOut(title, optionsValue, searchValue, setReceitas, setIsFetching) {
+  if (title === 'comidas') {
+    filterComidas(title, optionsValue, searchValue, setReceitas, setIsFetching);
+  }
+  if (title === 'bebidas') {
+    filterBebidas(title, optionsValue, searchValue, setReceitas, setIsFetching);
+  }
+}
 export default function Provider(props) {
   const [isFetching, setIsFetching] = useState(false);
   const [receitas, setReceitas] = useState([]);
@@ -135,6 +144,7 @@ export default function Provider(props) {
   const [title, setTitle] = useState('');
   const [sugestDrink, setSugestDrink] = useState([]);
   const [sugestFood, setSugestFood] = useState([]);
+  const [redirecionado, setRedirecionado] = useState(false);
   const [email, setEmail] = useState('');
   const funcBusca = (tipo, ingrediente) =>
     funcBusca1(tipo, ingrediente, title, setReceitas, setIsFetching);
@@ -158,17 +168,14 @@ export default function Provider(props) {
     setSugestFood,
     setEmail,
     funcBusca,
+    redirecionado,
+    setRedirecionado,
   };
   useEffect(() => {
     setupRecom(searchValue, setReceitas, setIsFetching, setSugestFood, setSugestDrink);
   }, []);
   useEffect(() => {
-    if (title === 'comidas') {
-      filterComidas(title, optionsValue, searchValue, setReceitas, setIsFetching);
-    }
-    if (title === 'bebidas') {
-      filterBebidas(title, optionsValue, searchValue, setReceitas, setIsFetching);
-    }
+    UseFilterOut(title, optionsValue, searchValue, setReceitas, setIsFetching);
   }, [changeFilter]);
   return <ReceitasContext.Provider value={state}>{props.children}</ReceitasContext.Provider>;
 }

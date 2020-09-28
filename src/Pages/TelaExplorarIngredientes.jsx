@@ -29,7 +29,7 @@ function startList(tipo, setLista) {
 }
 
 export default function TelaExplorarIngredientes(props) {
-  const { funcBusca } = useContext(Context);
+  const { funcBusca, setRedirecionado } = useContext(Context);
   const tipo = /comida/.test(props.match.path) ? 'comidas' : 'bebidas';
   const [lista, setLista] = useState([]);
   useEffect(() => {
@@ -51,6 +51,7 @@ export default function TelaExplorarIngredientes(props) {
                 } else {
                   funcBusca(tipo, ingrediente);
                 }
+                setRedirecionado(true);
               }}
             >
               <CardIngredient

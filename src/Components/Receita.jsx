@@ -29,6 +29,6 @@ export default function Receita(props) {
 }
 
 Receita.propTypes = {
-  receita: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
+  receita: PropTypes.arrayOf(PropTypes.instanceOf(Object)).isRequired,
   index: PropTypes.number.isRequired,
 };

@@ -6,35 +6,7 @@ import whiteHeart from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import '../CSS/TelaReceitaProcesso.css';
 import { convertFoodDone } from './DetalhesComida';
-
-function fotoPrincipal(details) {
-  let title = details.strMeal;
-  let foto = details.strMealThumb;
-  if (details.strDrink) {
-    title = details.strDrink;
-    foto = details.strDrinkThumb;
-  }
-  return <img src={foto} alt={title} className="recipe-photo" data-testid="recipe-photo" />;
-}
-
-function addFavorite(receita, setFavorite) {
-  let oFav = localStorage.getItem('favoriteRecipes');
-  if (!oFav) {
-    setFavorite(true);
-    return localStorage.setItem('favoriteRecipes', JSON.stringify([receita]));
-  }
-  oFav = [...JSON.parse(oFav)];
-  if (oFav.find((el) => el.id === receita.id)) {
-    setFavorite(false);
-    return localStorage.setItem(
-      'favoriteRecipes',
-      JSON.stringify(oFav.filter((el) => el.id !== receita.id))
-    );
-  }
-  const temp = [...oFav, receita];
-  setFavorite(true);
-  return localStorage.setItem('favoriteRecipes', JSON.stringify(temp));
-}
+import { fotoPrincipal, addFavorite } from './NewProcessoFunctions';
 
 export function convertFavorite(details, setFavority) {
   let type = 'Drink';
@@ -197,7 +169,6 @@ InputCheck.propTypes = {
 function moveToDone(details) {
   const { type, chave } = createBasicLocal(details);
   const localSAtual = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  const sendToDone = localSAtual[chave][details[`id${type}`]];
   delete localSAtual[chave][details[`id${type}`]];
   localStorage.setItem('inProgressRecipes', JSON.stringify(localSAtual));
   const temp = convertFoodDone(details, type);
@@ -210,17 +181,7 @@ function moveToDone(details) {
 
   localStorage.setItem('doneRecipes', JSON.stringify(doneAtual));
 }
-/* [{
-    id: id-da-receita,
-    type: comida-ou-bebida,
-    area: area-da-receita-ou-texto-vazio,
-    category: categoria-da-receita-ou-texto-vazio,
-    alcoholicOrNot: alcoholic-ou-non-alcoholic-ou-texto-vazio,
-    name: nome-da-receita,
-    image: imagem-da-receita,
-    doneDate: quando-a-receita-foi-concluida,
-    tags: array-de-tags-da-receita-ou-array-vazio
-}] */
+
 function Botao(props) {
   const { habilita, details } = props;
   return (
@@ -238,6 +199,7 @@ function Botao(props) {
 }
 Botao.propTypes = {
   habilita: propTypes.bool.isRequired,
+  details: propTypes.instanceOf(Object),
 };
 
 export default function Detalhes(props) {

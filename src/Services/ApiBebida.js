@@ -51,3 +51,20 @@ export const searchCockTailRandom = () => (
       .catch((error) => error),
   )
 );
+
+export const searchCockTailCategory = () => (
+  fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list').then((response) =>
+    response
+      .json()
+      .then((drink) => drink.drinks)
+      .catch((error) => error),
+  )
+);
+export const searchCockTailByCategory = (cat) => (
+  fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${cat}`).then((response) =>
+    response
+      .json()
+      .then((drink) => drink.drinks)
+      .catch((error) => error),
+  )
+);

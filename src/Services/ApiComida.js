@@ -79,3 +79,11 @@ export const searchMealCategory = () => (
       .catch((error) => error),
   )
 );
+export const searchMealByCategory = (cat) => (
+  fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${cat}`).then((response) =>
+    response
+      .json()
+      .then((meal) => meal.meals)
+      .catch((error) => error),
+  )
+);
