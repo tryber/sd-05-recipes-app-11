@@ -161,10 +161,6 @@ InputCheck.propTypes = {
 function moveToDone(details) {
   const { type, chave } = createBasicLocal(details);
   const localSAtual = JSON.parse(localStorage.getItem('inProgressRecipes'));
-<<<<<<< HEAD
-=======
-  /* const sendToDone = localSAtual[chave][details[`id${type}`]]; */
->>>>>>> 379f6e7ff1b8d1b1c0fde467e2dbcdd5c491dc29
   delete localSAtual[chave][details[`id${type}`]];
   localStorage.setItem('inProgressRecipes', JSON.stringify(localSAtual));
   const temp = convertFoodDone(details, type);
@@ -193,11 +189,7 @@ function Botao(props) {
 }
 Botao.propTypes = {
   habilita: propTypes.bool.isRequired,
-<<<<<<< HEAD
-  details: propTypes.instanceOf(Object),
-=======
   details: propTypes.instanceOf(Object).isRequired,
->>>>>>> 379f6e7ff1b8d1b1c0fde467e2dbcdd5c491dc29
 };
 
 export default function Detalhes(props) {

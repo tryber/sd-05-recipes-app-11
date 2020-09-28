@@ -17,7 +17,7 @@ import {
 } from '../Services/ApiBebida';
 
 function TemReceira(receitas, tipo, id, automaticRedirection) {
-  if (!receitas) return null;
+  if (typeof receitas !== 'object' || !receitas) return null;
   if (receitas.length === 1 && automaticRedirection) {
     return <Redirect to={`/${tipo}/${receitas[0][id]}`} />;
   } else if (receitas.length === 0) {

@@ -11,20 +11,24 @@ export default function ListReceitas() {
     [receitas],
   );
   if (receitas === undefined || receitas === null || typeof receitas !== 'object') {
-    console.log(typeof receitas);
+    return <h1>Loading...</h1>;
+  }
+  if (novasReceitas === undefined || novasReceitas === null || typeof novasReceitas !== 'object') {
     return <h1>Loading...</h1>;
   }
   return (
     <div className="listReceitas">
-      {novasReceitas
-        .filter((_, index) => index < 12)
-        .map((receita, index) => (
-          <Receita
-            receita={receita}
-            index={index}
-            key={receita.idMeal ? receita.idMeal : receita.idDrink}
-          />
-        ))}
+      {!novasReceitas
+        ? null
+        : novasReceitas
+            .filter((_, index) => index < 12)
+            .map((receita, index) => (
+              <Receita
+                receita={receita}
+                index={index}
+                key={receita.idMeal ? receita.idMeal : receita.idDrink}
+              />
+            ))}
     </div>
   );
 }
