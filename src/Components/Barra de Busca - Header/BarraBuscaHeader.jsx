@@ -16,7 +16,7 @@ export default function BarraBuscaHeader(props) {
       <div className="search">
         {showSearch ? <Search /> : null}
         {showSearch ? <Options /> : null}
-        {showSearch ? <ButtonBuscar /> : null}
+        {showSearch ? <ButtonBuscar automatic={props.automatic} /> : null}
       </div>
     </div>
   );
@@ -24,4 +24,5 @@ export default function BarraBuscaHeader(props) {
 
 BarraBuscaHeader.propTypes = {
   title: PropTypes.string.isRequired,
+  automatic: PropTypes.bool.isRequired,
 };

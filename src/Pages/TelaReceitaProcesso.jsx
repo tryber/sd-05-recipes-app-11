@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import { searchMealById } from '../Services/ApiComida';
 import { searchCockTailById } from '../Services/ApiBebida';
-import NewProcesso from '../Components/NewProcesso';
-import '../CSS/TelaDetalhes.css';
 import { favoriteRecipes } from './TelaDetalhesComida';
+import NewProcesso from '../Components/NewProcesso';
+import '../CSS/TelaReceitaProcesso.css';
 
 export function updateStatus(id, setFavoriteRecipes) {
-  /* done(setStatus, id); */
   favoriteRecipes(setFavoriteRecipes, id);
-  /* inProgressRecipes(setStatus, id, tipo); */
   return null;
 }
 export default function TelaProcesso(props) {

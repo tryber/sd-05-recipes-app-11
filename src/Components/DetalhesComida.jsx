@@ -7,27 +7,27 @@ import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 
-/* function convertFoodDone(food) {
-  console.log(food);
+export function convertFoodDone(food, tipo) {
   const saida = {
-    id: food.idMeal,
-    type: 'comida',
+    id: food[`id${tipo}`],
+    type: tipo === 'Meal' ? 'comida' : 'bebida',
     area: food.strArea,
     category: food.strCategory,
-    alcoholicOrNot: 'Not',
-    name: food.strMeal,
-    image: food.strMealThumb,
-    doneDate,
-    tags: food.strTags,
+    alcoholicOrNot: !food.strAlcoholic ? 'Not' : food.strAlcoholic,
+    name: food[`str${tipo}`],
+    image: food[`str${tipo}Thumb`],
+    doneDate: new Date().toLocaleDateString(),
+    tags: [food.strTags],
   };
-  console.log(saida);
   return saida;
-} */
+}
 
 function fotoPrincipal(details) {
   return (
     <img
-      src={details.strMealThumb} alt={details.strMeal} className="recipe-photo"
+      src={details.strMealThumb}
+      alt={details.strMeal}
+      className="recipe-photo"
       data-testid="recipe-photo"
     />
   );
@@ -165,27 +165,30 @@ function funcLinks(details, favority, setFavority, copiador, copy) {
     </div>
   );
 }
-
+function categoriaReceita(details) {
+  return (
+    <h5 className="recipe-category" data-testid="recipe-category">
+      {details.strCategory}
+    </h5>
+  );
+}
 export default function Detalhes(props) {
   const [favority, setFavority] = useState(false);
   const [copy, copiador] = useState(false);
   const {
-    details, favoriteRecipes, status, indexRecom, setIndexRecom,
-    sugestDrink, idDaReceita, location,
+    details, favoriteRecipes, status, indexRecom,
+    setIndexRecom, sugestDrink, idDaReceita, location,
   } = props;
   useEffect(() => setFavority(favoriteRecipes), []);
-
   const novosIngredientes = funcIngredients([], details);
   return (
     <div>
       {fotoPrincipal(details)}
       <div className="DetelhesBuddy">
         {funcLinks(details, favority, setFavority, copiador, copy)}
-        <h5 className="recipe-category" data-testid="recipe-category">
-          {details.strCategory}
-        </h5>
+        {categoriaReceita(details)}
         <h3 className="subTitle">Ingredients</h3>
-        <ul className="yellowCamp">
+        <ul className="yellowCampDetalhes">
           {novosIngredientes.map((item, index) => (
             <li key={item.ingrediente} data-testid={`${index}-ingredient-name-and-measure`}>
               {item.ingrediente}- {item.quantidade}
@@ -193,7 +196,9 @@ export default function Detalhes(props) {
           ))}
         </ul>
         <h3 className="subTitle">Instructions:</h3>
-        <p className="yellowCamp" data-testid="instructions">{details.strInstructions}</p>
+        <p className="yellowCampDetalhes" data-testid="instructions">
+          {details.strInstructions}
+        </p>
         <h3 className="subTitle">Video</h3>
         <ReactPlayer url={details.strYoutube} data-testid="video" width="100%" height="100%" />
         <h3 className="subTitle">Recomendações</h3>

@@ -5,35 +5,8 @@ import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import '../CSS/TelaReceitaProcesso.css';
-
-function fotoPrincipal(details) {
-  let title = details.strMeal;
-  let foto = details.strMealThumb;
-  if (details.strDrink) {
-    title = details.strDrink;
-    foto = details.strDrinkThumb;
-  }
-  return <img src={foto} alt={title} className="recipe-photo" data-testid="recipe-photo" />;
-}
-
-function addFavorite(receita, setFavorite) {
-  let oFav = localStorage.getItem('favoriteRecipes');
-  if (!oFav) {
-    setFavorite(true);
-    return localStorage.setItem('favoriteRecipes', JSON.stringify([receita]));
-  }
-  oFav = [...JSON.parse(oFav)];
-  if (oFav.find((el) => el.id === receita.id)) {
-    setFavorite(false);
-    return localStorage.setItem(
-      'favoriteRecipes',
-      JSON.stringify(oFav.filter((el) => el.id !== receita.id)),
-    );
-  }
-  const temp = [...oFav, receita];
-  setFavorite(true);
-  return localStorage.setItem('favoriteRecipes', JSON.stringify(temp));
-}
+import { convertFoodDone } from './DetalhesComida';
+import { fotoPrincipal, addFavorite } from './NewProcessoFunctions';
 
 export function convertFavorite(details, setFavority) {
   let type = 'Drink';
@@ -70,10 +43,8 @@ function funcLinks(details, favority, setFavority, copiador, copy) {
       </h1>
       <Link onClick={() => convertFavorite(details, setFavority)}>
         <img
-          src={favority ? blackHeart : whiteHeart}
-          alt="like icon"
-          className="icon"
-          data-testid="favorite-btn"
+          src={favority ? blackHeart : whiteHeart} alt="like icon"
+          className="icon" data-testid="favorite-btn"
         />
       </Link>
       <Link
@@ -112,8 +83,7 @@ export function funcIngredients(ingredients, detalhes) {
   const used = teste(detalhes);
   for (let i = 1; i < 20; i += 1) {
     if (
-      detalhes[`strIngredient${i}`] !== null &&
-      detalhes[`strIngredient${i}`] !== '' &&
+      detalhes[`strIngredient${i}`] !== null && detalhes[`strIngredient${i}`] !== '' &&
       detalhes[`strIngredient${i}`] !== undefined
     ) {
       ingredients.push({
@@ -165,9 +135,7 @@ function InputCheck(props) {
   if (!item.checked) {
     return (
       <input
-        type="checkbox"
-        className="ingredient-step"
-        id={item.ingrediente}
+        type="checkbox" className="ingredient-step" id={item.ingrediente}
         onClick={() => {
           action(details, setDone);
         }}
@@ -176,13 +144,10 @@ function InputCheck(props) {
   }
   return (
     <input
-      type="checkbox"
-      className="ingredient-step"
-      id={item.ingrediente}
+      type="checkbox" className="ingredient-step" id={item.ingrediente}
       onClick={() => {
         action(details, setDone);
-      }}
-      checked
+      }} checked
     />
   );
 }
@@ -193,11 +158,30 @@ InputCheck.propTypes = {
   setDone: propTypes.func.isRequired,
 };
 
+function moveToDone(details) {
+  const { type, chave } = createBasicLocal(details);
+  const localSAtual = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  delete localSAtual[chave][details[`id${type}`]];
+  localStorage.setItem('inProgressRecipes', JSON.stringify(localSAtual));
+  const temp = convertFoodDone(details, type);
+  if (localStorage.getItem('doneRecipes') === null) {
+    localStorage.setItem('doneRecipes', JSON.stringify([]));
+  }
+  const doneAtual = JSON.parse(localStorage.getItem('doneRecipes'));
+  doneAtual.push(temp);
+  console.log('Local Storage', doneAtual);
+
+  localStorage.setItem('doneRecipes', JSON.stringify(doneAtual));
+}
+
 function Botao(props) {
-  const { habilita } = props;
+  const { habilita, details } = props;
   return (
     <Link to={'/receitas-feitas'}>
-      <button data-testid="finish-recipe-btn" className="finish-recipe-btn" disabled={!habilita}>
+      <button
+        data-testid="finish-recipe-btn" className="finish-recipe-btn"
+        disabled={!habilita} onClick={() => moveToDone(details)}
+      >
         Finalizar receita
       </button>
     </Link>
@@ -205,17 +189,19 @@ function Botao(props) {
 }
 Botao.propTypes = {
   habilita: propTypes.bool.isRequired,
+  details: propTypes.instanceOf(Object).isRequired,
 };
+
 export default function Detalhes(props) {
   const { details, favoriteRecipes } = props;
   const [used, setDone] = useState(false);
+  console.log(used);
   const [copy, copiador] = useState(false);
   const [favority, setFavority] = useState(false);
   useEffect(() => setFavority(favoriteRecipes), []);
   const [usedIngredients, setUsed] = useState([]);
   const novosIngredientes = funcIngredients([], details);
   useEffect(() => setUsed(updateUsedIngredients(details, setDone, novosIngredientes)), []);
-  console.log(used);
   return (
     <div>
       {fotoPrincipal(details)}
@@ -225,15 +211,12 @@ export default function Detalhes(props) {
           {details.strCategory}
         </h5>
         <h3 className="subTitle">Ingredients</h3>
-        <ul className="yellowCamp">
+        <ul className="yellowCampProcesso">
           {novosIngredientes.map((item) => (
             <div data-testid="0-ingredient-step">
               <InputCheck
-                item={item}
-                used={usedIngredients}
-                action={changeStorage}
-                details={details}
-                setDone={setDone}
+                item={item} used={usedIngredients} action={changeStorage}
+                details={details} setDone={setDone}
               />
               <label htmlFor={item.ingrediente} className={item.checked ? 'corta' : ''}>
                 {item.ingrediente}- {item.quantidade}
@@ -242,11 +225,11 @@ export default function Detalhes(props) {
           ))}
         </ul>
         <h3 className="subTitle">Instructions:</h3>
-        <p className="yellowCamp" data-testid="instructions">
+        <p className="yellowCampProcesso" data-testid="instructions">
           {details.strInstructions}
         </p>
       </div>
-      <Botao habilita={novosIngredientes.every((el) => el.checked)} />
+      <Botao habilita={novosIngredientes.every((el) => el.checked)} details={details} />
     </div>
   );
 }

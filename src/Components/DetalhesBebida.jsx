@@ -89,7 +89,6 @@ function funcLinks(details, favority, setFavority, copy, copiador) {
 }
 
 export default function Detalhes(props) {
-  console.log(props);
   const [favority, setFavority] = useState(false);
   const [copy, copiador] = useState(false);
   const {
@@ -109,14 +108,14 @@ export default function Detalhes(props) {
         <h5 className="recipe-category" data-testid="recipe-category">
           {`${details.strCategory}-${Alcoholic}`}</h5>
         <h3 className="subTitle">Ingredients</h3>
-        <ul className="yellowCamp"> {ingredientes.map((item, index) => (
+        <ul className="yellowCampDetalhes"> {ingredientes.map((item, index) => (
           <li key={item.ingrediente} data-testid={`${index}-ingredient-name-and-measure`}>
             {item.ingrediente}- {item.quantidade}
           </li>
         ))}
         </ul>
         <h3 className="subTitle">Instructions:</h3>
-        <p className="yellowCamp" data-testid="instructions">{details.strInstructions}</p>
+        <p className="yellowCampDetalhes" data-testid="instructions">{details.strInstructions}</p>
         <h3 className="subTitle">Recomendações</h3>
         <div style={{ display: 'flex', flex: 1, flexGrow: 1, flexDirection: 'row' }}>
           <button onClick={() => setIndexRecom(indexRecom - 1)}>{'<'}</button>

@@ -27,13 +27,13 @@ function App() {
       <Route path="/explorar/bebidas/ingredientes" component={ExplorarIngredientes} />
       <Route path="/explorar/comidas/area" component={ExplorarComidasAreas} />
       <Route path="/explorar/comidas" component={ExplorarBebidaComida} />
-      <Route path="/explorar/bebidas" component={ExplorarBebidaComida} />
-      <Route path="/explorar" component={Explorar} />
+      <Route exact path="/explorar/bebidas" component={ExplorarBebidaComida} />
+      <Route exact path="/explorar" component={Explorar} />
       <Route path="/receitas-feitas" component={ReceitasFeitas} />
       <Route path="/receitas-favoritas" component={ReceitasFavoritas} />
       <Route path="/perfil" component={Perfil} />
       <Route exact path="/" component={Login} />
-      {/* <Route render={() => <h1 className="naoEncontrada">Página não encontrada</h1>} /> */}
+      <Route render={() => <h1 className="naoEncontrada">Not Found</h1>} />
     </Switch>
   );
 }

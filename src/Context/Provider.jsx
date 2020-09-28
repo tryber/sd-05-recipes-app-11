@@ -22,7 +22,7 @@ function noElements(arr) {
     : null;
 }
 
-function filterComidas(title, optionsValue, searchValue, setReceitas, setIsFetching) {
+export function filterComidas(title, optionsValue, searchValue, setReceitas, setIsFetching) {
   if (optionsValue === 'primeiraLetra') {
     if (searchValue.length !== 1) {
       window.alert('Sua busca deve conter somente 1 (um) caracter');
@@ -39,6 +39,7 @@ function filterComidas(title, optionsValue, searchValue, setReceitas, setIsFetch
   } else if (optionsValue === 'ingrediente') {
     ApiSearchByMainIngredient(searchValue)
       .then((ListaComidasPorIngrediente) => {
+        console.log(ListaComidasPorIngrediente);
         setReceitas(ListaComidasPorIngrediente);
         noElements(ListaComidasPorIngrediente);
       })
@@ -94,13 +95,7 @@ function filterBebidas(title, optionsValue, searchValue, setReceitas, setIsFetch
   return null;
 }
 
-function setupRecomendation(
-  searchValue,
-  setReceitas,
-  setIsFetching,
-  setSugestFood,
-  setSugestDrink,
-) {
+function setupRecom(searchValue, setReceitas, setIsFetching, setSugestFood, setSugestDrink) {
   searchCockTailByName('')
     .then((ListaBebidasPeloNome) => {
       setSugestDrink(ListaBebidasPeloNome.slice(0, 6));
@@ -118,6 +113,28 @@ function setupRecomendation(
     });
 }
 
+function funcBusca1(tipo, ingrediente, title, setReceitas, setIsFetching) {
+  if (tipo === 'comidas') {
+    filterComidas(title, 'ingrediente', ingrediente, setReceitas, setIsFetching);
+  } else {
+    filterBebidas(title, 'ingrediente', ingrediente, setReceitas, setIsFetching);
+  }
+  return null;
+}
+/* const funcBusca = (tipo, ingrediente) => {
+    temp1 = tipo === 'comidas'
+        ? filterComidas(title, 'ingrediente', ingrediente, setReceitas, setIsFetching)
+        : filterBebidas(title, 'ingrediente', ingrediente, setReceitas, setIsFetching);
+  }; */
+
+function UseFilterOut(title, optionsValue, searchValue, setReceitas, setIsFetching) {
+  if (title === 'comidas') {
+    filterComidas(title, optionsValue, searchValue, setReceitas, setIsFetching);
+  }
+  if (title === 'bebidas') {
+    filterBebidas(title, optionsValue, searchValue, setReceitas, setIsFetching);
+  }
+}
 export default function Provider(props) {
   const [isFetching, setIsFetching] = useState(false);
   const [receitas, setReceitas] = useState([]);
@@ -127,7 +144,10 @@ export default function Provider(props) {
   const [title, setTitle] = useState('');
   const [sugestDrink, setSugestDrink] = useState([]);
   const [sugestFood, setSugestFood] = useState([]);
-
+  const [redirecionado, setRedirecionado] = useState(false);
+  const [email, setEmail] = useState('');
+  const funcBusca = (tipo, ingrediente) =>
+    funcBusca1(tipo, ingrediente, title, setReceitas, setIsFetching);
   const state = {
     isFetching,
     receitas,
@@ -135,29 +155,28 @@ export default function Provider(props) {
     searchValue,
     changeFilter,
     title,
+    sugestDrink,
+    sugestFood,
+    email,
     setIsFetching,
     setReceitas,
     setOptionsValue,
     setSearchValue,
     setchangeFilter,
     setTitle,
-    sugestDrink,
     setSugestDrink,
-    sugestFood,
     setSugestFood,
+    setEmail,
+    funcBusca,
+    redirecionado,
+    setRedirecionado,
   };
   useEffect(() => {
-    setupRecomendation(searchValue, setReceitas, setIsFetching, setSugestFood, setSugestDrink);
+    setupRecom(searchValue, setReceitas, setIsFetching, setSugestFood, setSugestDrink);
   }, []);
   useEffect(() => {
-    if (title === 'comidas') {
-      filterComidas(title, optionsValue, searchValue, setReceitas, setIsFetching);
-    }
-    if (title === 'bebidas') {
-      filterBebidas(title, optionsValue, searchValue, setReceitas, setIsFetching);
-    }
+    UseFilterOut(title, optionsValue, searchValue, setReceitas, setIsFetching);
   }, [changeFilter]);
-
   return <ReceitasContext.Provider value={state}>{props.children}</ReceitasContext.Provider>;
 }
 
