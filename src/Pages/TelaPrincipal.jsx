@@ -65,6 +65,7 @@ function updateClicks(selecCat, setReceitas, tipo) {
   }
 }
 export default function TelaPrincipal(props) {
+  
   const { receitas, setReceitas, redirecionado, setRedirecionado } = useContext(ReceitasContext);
   const [categorias, setCategorias] = useState([]);
   const [selecCat, setSelecCat] = useState('');
